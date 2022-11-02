@@ -10,10 +10,12 @@ package sgbs.View;
  */
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-public class Menu {
+public class Menu implements ActionListener{
 
     JFrame frame;
     JPanel Global;
@@ -24,7 +26,7 @@ public class Menu {
     Color color = new Color(255, 255, 255);
     Color corPainel = new Color(60, 63, 65);
     JLabel l_logotipo;
-
+    //Stock stock=new Stock();
     public Menu() {
         inicializarComponents();
         configurarFrame();
@@ -32,7 +34,7 @@ public class Menu {
     }
 
     private void inicializarComponents() {
-        frame = new JFrame("Sistema de Gestão de Botle Store");
+        frame = new JFrame("Sistema de Gestão de Bottle Store");
 
         //Inicializar Botoes
         b_home = new JButton("Página inicial");
@@ -43,11 +45,15 @@ public class Menu {
         b_home_closed = new JButton();
         b_configuracoes = new JButton("Configurações");
         b_stock = new JButton("Estoque");
+        b_stock.addActionListener(this);
         b_sair = new JButton("Sair");
         b_utlizador = new JButton("manjate");
 
         //Label
-        l_logotipo = new JLabel("Alex Botle Store");
+        l_logotipo = new JLabel("Alex Bottle Store");
+        
+        //Action Listener
+        b_utlizador.addActionListener(this);
 
     }
 
@@ -227,6 +233,15 @@ public class Menu {
 
     public static void main(String[] args) {
         new Menu();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == b_stock){
+          //  Stock s;
+          //  Global.add(Stock.configurarFrame(),BorderLayout.CENTER);
+          Global.add(new Label("FGGGG"), BorderLayout.CENTER);
+        }
     }
 
 }

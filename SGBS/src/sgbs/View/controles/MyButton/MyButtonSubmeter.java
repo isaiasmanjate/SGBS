@@ -72,21 +72,21 @@ public class MyButtonSubmeter extends JButton{
     public MyButtonSubmeter() {
         //  Init Color
 
-        setColor(Color.GREEN);
-        colorOver = new Color(179, 250, 160);
-        colorClick = new Color(152, 184, 144);
-        borderColor = new Color(30, 136, 56);
+     //   setColor(Color.GREEN);
+        colorOver = new Color(0, 120, 190);
+        colorClick = new Color(0, 134, 190);
+        borderColor = new Color(0, 134, 190);
         setContentAreaFilled(false);
         //  Add event mouse
         addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent me) {
-                setBackground(colorOver);
+               setBackground(colorOver);
                 over = true;
             }
 
             @Override
             public void mouseExited(MouseEvent me) {
-                setBackground(color);
+                //setBackground(color);
                 over = false;
 
             }
@@ -99,7 +99,7 @@ public class MyButtonSubmeter extends JButton{
             @Override
             public void mouseReleased(MouseEvent me) {
                 if (over) {
-                    setBackground(colorOver);
+                   // setBackground(colorOver);
                 } else {
                     setBackground(color);
                 }

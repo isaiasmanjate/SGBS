@@ -17,7 +17,7 @@ public class SubFamilia {
     private SubFamilia () {
         inicializarComponentes();
         configurarComponentes();
-        janela.pack();
+  
         janela.setVisible(true);
         
     }
@@ -57,8 +57,9 @@ public class SubFamilia {
     public void configurarComponentes() {
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         janela.setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
-        janela.setLocationRelativeTo(null);
-        janela.add(pGlobal);
+         janela.add(pGlobal);
+      
+       
         
         pGlobal.setLayout(new BorderLayout());
         pGlobal.add(cimaJPanel, BorderLayout.NORTH);
@@ -70,6 +71,8 @@ public class SubFamilia {
         configurar_pBotoes(); 
         configurar_pBotaoTerminar();
         configurar_pBotoGravar();
+           janela.pack();
+        janela.setLocationRelativeTo(null);
     }
     
     public void configurar_cimaJPanel(){
