@@ -125,7 +125,6 @@ public class Login implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         new Menu();
-        janela.dispose();
         
 
     }

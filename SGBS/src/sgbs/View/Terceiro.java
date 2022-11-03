@@ -12,16 +12,19 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+
 public class Terceiro {
-   JFrame frame;
+
+    JFrame frame;
     JPanel global;
 
     GridBagConstraints constraints = new GridBagConstraints();
-    private sgbs.View.controles.combobox.Combobox  c_terceiro;
-    private sgbs.View.controles.textfield_suggestion.TextFieldSuggestion tf_morada, tf_contacto, tf_nuit, tf_codigo,tf_nome;
-    private JLabel l_terceiro, l_morada, l_contacto, l_nuit, l_codigo, l_icon, l_titulo_frame,l_nome;
-    private sgbs.View.controles.MyButton.MyButtonSubmeter b_cancelar, b_lista,  b_terminar, b_gravar,b_apagar;
-    String s_terceiro[]={" ","Fornecedor","Cliente"};
+    private sgbs.View.controles.combobox.Combobox c_terceiro;
+    private sgbs.View.controles.textfield_suggestion.TextFieldSuggestion tf_morada, tf_contacto, tf_nuit, tf_codigo, tf_nome;
+    private JLabel l_terceiro, l_morada, l_contacto, l_nuit, l_codigo, l_icon, l_titulo_frame, l_nome;
+    private sgbs.View.controles.MyButton.MyButtonSubmeter b_cancelar, b_lista, b_terminar, b_gravar, b_apagar;
+    String s_terceiro[] = {" ", "Fornecedor", "Cliente"};
+
     public Terceiro() {
         inicialializarComponentes();
         configurarFrame();
@@ -31,7 +34,7 @@ public class Terceiro {
         frame = new JFrame("Cadastro do terceiro");
 
         //Inicializar ComboBox
-        c_terceiro = new sgbs.View.controles.combobox.Combobox ();
+        c_terceiro = new sgbs.View.controles.combobox.Combobox();
         c_terceiro.setSelectedIndex(-1);
         c_terceiro.setModel(new javax.swing.DefaultComboBoxModel(s_terceiro));
         c_terceiro.setLabeText("Terceiro");
@@ -41,7 +44,7 @@ public class Terceiro {
         tf_contacto = new sgbs.View.controles.textfield_suggestion.TextFieldSuggestion();
         tf_nuit = new sgbs.View.controles.textfield_suggestion.TextFieldSuggestion();
         tf_codigo = new sgbs.View.controles.textfield_suggestion.TextFieldSuggestion();
-        tf_nome=new sgbs.View.controles.textfield_suggestion.TextFieldSuggestion();
+        tf_nome = new sgbs.View.controles.textfield_suggestion.TextFieldSuggestion();
 
         //Inicializar Labels
         l_codigo = new JLabel("Codigo");
@@ -50,16 +53,15 @@ public class Terceiro {
         l_nuit = new JLabel("Nuit");
         l_icon = new JLabel();
         l_titulo_frame = new JLabel();
-        l_nome=new JLabel("Nome");
+        l_nome = new JLabel("Nome");
 
         //Inicializar Botoes
         b_cancelar = new sgbs.View.controles.MyButton.MyButtonSubmeter();
         b_lista = new sgbs.View.controles.MyButton.MyButtonSubmeter();
         b_terminar = new sgbs.View.controles.MyButton.MyButtonSubmeter();
         b_gravar = new sgbs.View.controles.MyButton.MyButtonSubmeter();
-        b_apagar=new sgbs.View.controles.MyButton.MyButtonSubmeter();
+        b_apagar = new sgbs.View.controles.MyButton.MyButtonSubmeter();
         //b_lista.setBorder(new RoundedBorder(20));
-        
 
     }
 
@@ -70,12 +72,13 @@ public class Terceiro {
         global.add(painelCentro(), BorderLayout.CENTER);
         global.add(painelSul(), BorderLayout.SOUTH);
         frame.add(global);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
         frame.pack();
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-   
+
         frame.setVisible(true);
 
     }
@@ -94,7 +97,7 @@ public class Terceiro {
         l_titulo_frame.setFont(new java.awt.Font("Roboto Black", 1, 24));
         l_titulo_frame.setText("Cadastrar terceiro");
         l_titulo_frame.setForeground(new java.awt.Color(0, 134, 190));
-       // l_titulo_frame.setBackground(Color.blue);
+        // l_titulo_frame.setBackground(Color.blue);
         panel.add(l_icon);
         panel.add(l_titulo_frame);
 
@@ -113,7 +116,7 @@ public class Terceiro {
         JPanel principal = new JPanel();
         JPanel panel = new JPanel();
         principal.setLayout(new BorderLayout());
-        
+
         principal.setBorder(new TitledBorder(LineBorder.createGrayLineBorder()));
         panel.setLayout(new GridBagLayout());
         principal.setBackground(new java.awt.Color(255, 255, 255));
@@ -127,13 +130,12 @@ public class Terceiro {
         addGB(panel, tf_codigo, 2, 1);
         addGB(panel, l_nome, 3, 0);
         addGB(panel, tf_nome, 3, 1);
-        addGB(panel,b_lista , 1, 1);
+        addGB(panel, b_lista, 1, 1);
         addGB(panel, l_morada, 3, 2);
         addGB(panel, tf_morada, 3, 3);
         addGB(panel, l_nuit, 2, 2);
         addGB(panel, tf_nuit, 2, 3);
         addGB(panel, new JLabel(" "), 0, 4);
-
 
         principal.add(panel, BorderLayout.NORTH);
         return principal;
@@ -149,7 +151,7 @@ public class Terceiro {
         JPanel panelA = new JPanel();
         JPanel panelB = new JPanel();
         principal.setLayout(new BorderLayout());
-        
+
         principal.setBackground(new java.awt.Color(255, 255, 255));
         panelA.setBackground(new java.awt.Color(255, 255, 255));
         panelB.setBackground(new java.awt.Color(255, 255, 255));
@@ -168,7 +170,7 @@ public class Terceiro {
 
     private void personalizarComponent() {
         //fornecedor
-       // l_Fornecedor.setFont(new java.awt.Font("Roboto Light", 1, 14));
+        // l_Fornecedor.setFont(new java.awt.Font("Roboto Light", 1, 14));
         c_terceiro.setForeground(new java.awt.Color(0, 0, 0));
         c_terceiro.setPreferredSize(new Dimension(150, 32));
         //contacto
@@ -189,17 +191,17 @@ public class Terceiro {
         tf_codigo.setForeground(new java.awt.Color(0, 0, 0));
         tf_codigo.setPreferredSize(new Dimension(150, 30));
         //Procurar
-         b_apagar.setPreferredSize(new Dimension(100, 25));
+        b_apagar.setPreferredSize(new Dimension(100, 25));
         b_apagar.setBackground(new java.awt.Color(0, 134, 190));
         b_apagar.setForeground(new java.awt.Color(255, 255, 255));
-         b_apagar.setText("Apagar");
+        b_apagar.setText("Apagar");
         b_apagar.setRadius(20);
         b_apagar.setBorder(null);
-          //nome
+        //nome
         l_nome.setFont(new java.awt.Font("Roboto Light", 1, 14));
         tf_nome.setForeground(new java.awt.Color(0, 0, 0));
         tf_nome.setPreferredSize(new Dimension(150, 30));
-        
+
         //Lista Terceiro
         b_lista.setPreferredSize(new Dimension(30, 25));
         b_lista.setBackground(new java.awt.Color(0, 134, 190));
@@ -212,7 +214,7 @@ public class Terceiro {
         b_terminar.setPreferredSize(new Dimension(100, 25));
         b_terminar.setBackground(new java.awt.Color(0, 134, 190));
         b_terminar.setForeground(new java.awt.Color(255, 255, 255));
-         b_terminar.setText("Terminar");
+        b_terminar.setText("Terminar");
         b_terminar.setRadius(20);
         b_terminar.setBorder(null);
         //Cancelar
@@ -223,13 +225,12 @@ public class Terceiro {
         b_cancelar.setRadius(20);
         b_cancelar.setBorder(null);
         //Gravar
-         b_gravar.setPreferredSize(new Dimension(100, 25));
+        b_gravar.setPreferredSize(new Dimension(100, 25));
         b_gravar.setBackground(new java.awt.Color(0, 134, 190));
         b_gravar.setForeground(new java.awt.Color(255, 255, 255));
         b_gravar.setText("Gravar");
         b_gravar.setRadius(20);
-        b_gravar.setBorder(null);       
+        b_gravar.setBorder(null);
 
-    
-}
+    }
 }

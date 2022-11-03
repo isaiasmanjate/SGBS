@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-public class Menu implements ActionListener{
+public class Menu implements ActionListener {
 
     JFrame frame;
     JPanel Global;
@@ -26,6 +26,7 @@ public class Menu implements ActionListener{
     Color color = new Color(255, 255, 255);
     Color corPainel = new Color(60, 63, 65);
     JLabel l_logotipo;
+
     //Stock stock=new Stock();
     public Menu() {
         inicializarComponents();
@@ -45,16 +46,26 @@ public class Menu implements ActionListener{
         b_home_closed = new JButton();
         b_configuracoes = new JButton("Configurações");
         b_stock = new JButton("Estoque");
-        b_stock.addActionListener(this);
         b_sair = new JButton("Sair");
         b_utlizador = new JButton("manjate");
 
+        //Action Listener
+        b_stock.addActionListener(this);
+        b_home.addActionListener(this);
+        b_sair.addActionListener(this);
+        b_utlizador.addActionListener(this);
+        b_configuracoes.addActionListener(this);
+        b_listagens.addActionListener(this);
+        b_vendas.addActionListener(this);
+        b_artigos.addActionListener(this);
+        b_terceiros.addActionListener(this);
+        b_home_closed.addActionListener(this);
+        
+
         //Label
         l_logotipo = new JLabel("Alex Bottle Store");
-        
-        //Action Listener
-        b_utlizador.addActionListener(this);
 
+      
     }
 
     private void configurarFrame() {
@@ -237,11 +248,21 @@ public class Menu implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == b_stock){
-          //  Stock s;
-          //  Global.add(Stock.configurarFrame(),BorderLayout.CENTER);
-          Global.add(new Label("FGGGG"), BorderLayout.CENTER);
+        if (e.getSource() == b_stock) {
+             new Stock();
+        }else if(e.getSource()==b_artigos){
+            new Produto();
+        }else if(e.getSource()==b_utlizador){
+            new Login();
+            frame.dispose();
+        }else if(e.getSource()==b_terceiros){
+            new Terceiro();
+        }else if(e.getSource()==b_sair){
+            frame.dispose();
+        }else if(e.getSource()==b_vendas){
+            new Venda();
         }
+            
     }
 
 }

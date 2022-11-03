@@ -10,16 +10,18 @@ package sgbs.View;
  */
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-public class Stock  {
+public class Stock implements ActionListener {
 
     JFrame frame;
     JPanel global;
 
     GridBagConstraints constraints = new GridBagConstraints();
-    private sgbs.View.controles.combobox.Combobox  c_Fornecedor;
+    private sgbs.View.controles.combobox.Combobox c_Fornecedor;
     private sgbs.View.controles.textfield_suggestion.TextFieldSuggestion tf_morada, tf_contacto, tf_nuit, tf_codigo, tf_preco, tf_qtd, tf_descricao;
     private JLabel l_Fornecedor, l_morada, l_contacto, l_nuit, l_codigo, l_Descricao, l_Preco_custo, l_qtd, l_icon, l_titulo_frame;
     private JButton b_confirmar, b_cancelar, b_terminar, b_procurar;
@@ -34,7 +36,7 @@ public class Stock  {
         frame = new JFrame("Entrada de Stock");
 
         //Inicializar ComboBox
-        c_Fornecedor = new sgbs.View.controles.combobox.Combobox ();
+        c_Fornecedor = new sgbs.View.controles.combobox.Combobox();
         c_Fornecedor.setSelectedIndex(-1);
         c_Fornecedor.setLabeText("Fornecedor");
 
@@ -48,7 +50,7 @@ public class Stock  {
         tf_qtd = new sgbs.View.controles.textfield_suggestion.TextFieldSuggestion();
 
         //Inicializar Labels
-       // l_Fornecedor = new JLabel("Fornecedor");
+        // l_Fornecedor = new JLabel("Fornecedor");
         l_Descricao = new JLabel("Descrição");
         l_Preco_custo = new JLabel("Preço custo");
         l_codigo = new JLabel("Codigo");
@@ -62,15 +64,22 @@ public class Stock  {
         //Inicializar Botoes
         b_cancelar = new JButton("Cancelar");
         b_confirmar = new JButton("Confirmar");
-        b_terminar = new JButton("Terminar");
+        b_terminar = new JButton("Gravar");
         b_procurar = new JButton("");
-       // b_confirmar.setBorder(null);
+        // b_confirmar.setBorder(null);
 
         //Inicializar tabela
-        String[] header = {"Codigo", "Descrição", "Preço", "Qtd", "Total"};
-        Object[][] items = {{"001", "Bebida", "0,00MT", "1.0", "0,00MT"}};
+        String[] header = {"Codigo", "Fornecedor", "Descrição", "Preço", "Qtd", "Total"};
+        Object[][] items = {{"001", "CDM", "Bebida", "0,00MT", "1.0", "0,00MT"}};
         tabela = new JTable(items, header);
+
+        //Listener
+        b_cancelar.addActionListener(this);
+        b_confirmar.addActionListener(this);
+        b_terminar.addActionListener(this);
+        b_procurar.addActionListener(this);
         
+        tf_codigo.addActionListener(this);
 
     }
 
@@ -81,12 +90,13 @@ public class Stock  {
         global.add(painelCentro(), BorderLayout.CENTER);
         global.add(painelSul(), BorderLayout.SOUTH);
         frame.add(global);
-        frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setResizable(false);
+        //  frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
         frame.pack();
         frame.setLocationRelativeTo(null);
-   
+
         frame.setVisible(true);
 
     }
@@ -105,7 +115,7 @@ public class Stock  {
         l_titulo_frame.setFont(new java.awt.Font("Roboto Black", 1, 24));
         l_titulo_frame.setText("Entrada de Stock");
         l_titulo_frame.setForeground(new java.awt.Color(0, 134, 190));
-       // l_titulo_frame.setBackground(Color.blue);
+        // l_titulo_frame.setBackground(Color.blue);
         panel.add(l_icon);
         panel.add(l_titulo_frame);
 
@@ -127,6 +137,8 @@ public class Stock  {
         principal.setLayout(new BorderLayout());
         panelB.setBorder(new TitledBorder(LineBorder.createGrayLineBorder()));
         principal.setBorder(new TitledBorder(LineBorder.createGrayLineBorder()));
+        principal.setBorder(BorderFactory.createTitledBorder("Dados"));
+
         panelB.setLayout(new GridBagLayout());
         panel.setLayout(new GridBagLayout());
         principal.setBackground(new java.awt.Color(255, 255, 255));
@@ -199,10 +211,10 @@ public class Stock  {
     }
 
     private void personalizarComponent() {
-         //Tabela
+        //Tabela
         tabela.setSelectionBackground(new java.awt.Color(101, 170, 239));
         //fornecedor
-       // l_Fornecedor.setFont(new java.awt.Font("Roboto Light", 1, 14));
+        // l_Fornecedor.setFont(new java.awt.Font("Roboto Light", 1, 14));
         c_Fornecedor.setForeground(new java.awt.Color(0, 0, 0));
         c_Fornecedor.setPreferredSize(new Dimension(150, 32));
         //contacto
@@ -225,7 +237,7 @@ public class Stock  {
         b_procurar.setPreferredSize(new Dimension(28, 25));
         b_procurar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgbs/View/images/listagem.png")));
         b_procurar.setBackground(new java.awt.Color(0, 134, 190));
-       
+
         //Descricao
         l_Descricao.setFont(new java.awt.Font("Roboto Light", 1, 14));
         tf_descricao.setForeground(new java.awt.Color(0, 0, 0));
@@ -240,7 +252,7 @@ public class Stock  {
         tf_qtd.setPreferredSize(new Dimension(150, 30));
         //Confirmar
         b_confirmar.setPreferredSize(new Dimension(100, 25));
-         b_confirmar.setBackground(new java.awt.Color(0, 134, 190));
+        b_confirmar.setBackground(new java.awt.Color(0, 134, 190));
         b_confirmar.setForeground(new java.awt.Color(255, 255, 255));
         //Terminar
         b_terminar.setPreferredSize(new Dimension(150, 25));
@@ -251,6 +263,15 @@ public class Stock  {
         b_cancelar.setBackground(new java.awt.Color(0, 134, 190));
         b_cancelar.setForeground(new java.awt.Color(255, 255, 255));
 
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == b_cancelar) {
+            frame.dispose();
+       
+       
+    }
     }
 
 }
