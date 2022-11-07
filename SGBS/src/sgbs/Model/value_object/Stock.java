@@ -12,22 +12,43 @@ import java.io.Serializable;
  */
 public class Stock implements Serializable {
 
-    int codigo, id_fornecedor,id_produto;
+    int codigo,codigo_produto;
+     int codigo_fornecedor;
 
     String Descricao;
     float preco_compra;
     int quantidade;
     float total;
 
-    public Stock(int codigo, int id_fornecedor,int id_produto, String Descricao, float preco_compra, int quantidade, float total) {
+    public Stock(int codigo, int codigo_fornecedor,int codigo_produto, String Descricao, float preco_compra, int quantidade, float total) {
         this.codigo = codigo;
-        this.id_produto=id_produto;
-        this.id_fornecedor = id_fornecedor;
+        this.codigo_produto=codigo_produto;
+        this.codigo_fornecedor = codigo_fornecedor;
         this.Descricao = Descricao;
         this.preco_compra = preco_compra;
         this.quantidade = quantidade;
         this.total = total;
     }
+    public Stock(){
+        
+    }
+
+    public int getCodigo_produto() {
+        return codigo_produto;
+    }
+
+    public void setCodigo_produto(int codigo_produto) {
+        this.codigo_produto = codigo_produto;
+    }
+
+    public int getCodigo_fornecedor() {
+        return codigo_fornecedor;
+    }
+
+    public void setCodigo_fornecedor(int codigo_fornecedor) {
+        this.codigo_fornecedor = codigo_fornecedor;
+    }
+    
 
     public int getCodigo() {
         return codigo;
@@ -37,13 +58,7 @@ public class Stock implements Serializable {
         this.codigo = codigo;
     }
 
-    public int getId_fornecedor() {
-        return id_fornecedor;
-    }
-
-    public void setId_fornecedor(int id_fornecedor) {
-        this.id_fornecedor = id_fornecedor;
-    }
+  
 
     public String getDescricao() {
         return Descricao;
@@ -53,13 +68,7 @@ public class Stock implements Serializable {
         this.Descricao = Descricao;
     }
 
-    public int getId_produto() {
-        return id_produto;
-    }
-
-    public void setId_produto(int id_produto) {
-        this.id_produto = id_produto;
-    }
+ 
 
     public float getPreco_compra() {
         return preco_compra;

@@ -28,6 +28,17 @@ public class Produto implements Serializable{
         this.validade=validade;
         this.iva=iva;
     }
+    public Produto(){
+        
+    }
+
+    public float getIva() {
+        return iva;
+    }
+
+    public void setIva(float iva) {
+        this.iva = iva;
+    }
 
     public int getId_familia() {
         return id_familia;

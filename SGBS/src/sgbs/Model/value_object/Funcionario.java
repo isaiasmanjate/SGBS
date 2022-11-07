@@ -20,6 +20,9 @@ public class Funcionario extends Pessoa implements Serializable{
         this.password=password;
         this.nivel=nivel;
     }
+    public Funcionario(){
+        
+    }
 
     public long getNuit() {
         return nuit;

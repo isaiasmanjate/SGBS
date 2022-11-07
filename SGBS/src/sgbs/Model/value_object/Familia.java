@@ -13,11 +13,11 @@ import java.io.Serializable;
 public class Familia implements Serializable{
 
     int codigo;
-    String familia , descricao;
+    String nome , descricao;
 
-    public Familia(int codigo, String familia, String descricao) {
+    public Familia(int codigo, String nome, String descricao) {
         this.codigo = codigo;
-        this.familia = familia;
+        this.nome = nome;
         this.descricao = descricao;
     }
 
@@ -29,12 +29,12 @@ public class Familia implements Serializable{
         this.codigo = codigo;
     }
 
-    public String getFamilia() {
-        return familia;
+    public String getNome() {
+        return nome;
     }
 
-    public void setFamilia(String familia) {
-        this.familia = familia;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getDescricao() {
@@ -43,6 +43,9 @@ public class Familia implements Serializable{
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+    public Familia(){
+        
     }
     
 }

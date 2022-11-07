@@ -152,7 +152,7 @@ public class SubFamilia {
         //Familia Sub Familia
         l_subFamilia.setFont(new java.awt.Font("Roboto Light", 1, 14));
         l_subFamilia.setForeground(new java.awt.Color(0, 0, 0));
-        l_subFamilia.setText("Sub Familia");
+        l_subFamilia.setText("Nome");
         tf_subFamilia.setForeground(new java.awt.Color(0, 0, 0));
         tf_subFamilia.setPreferredSize(new Dimension(190, 35));
         

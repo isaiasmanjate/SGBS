@@ -12,9 +12,13 @@ import java.io.Serializable;
  */
 public class Cliente extends Pessoa implements Serializable {
 
+    public Cliente(){
+        
+    }
     public Cliente(int codigo, String nome, String contacto, String morada, long nuit) {
         super(codigo, nome, contacto, morada, nuit);
     }
+    
 
     public long getNuit() {
         return nuit;

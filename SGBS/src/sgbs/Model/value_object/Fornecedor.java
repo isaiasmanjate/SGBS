@@ -15,7 +15,9 @@ public class Fornecedor extends Pessoa implements Serializable{
     public Fornecedor(int codigo, String nome, String contacto, String morada, long nuit) {
         super(codigo, nome, contacto, morada, nuit);
     }
-  
+    public Fornecedor(){
+        
+    }
 
     public String getNome() {
         return nome;

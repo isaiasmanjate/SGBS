@@ -11,22 +11,34 @@ import java.io.Serializable;
  * @author Manjate
  */
 public class Venda implements Serializable{
-    int id_venda, id_produto,id_cliente;
+    int id_venda, id_produto,id_cliente,id_funcionario;
      String descricao;
      int qtd;
      float preco;
      String data;
      float total;
 
-    public Venda(int id_venda, int id_produto, int id_cliente, String descricao, int qtd, float preco, String data, float total) {
+    public Venda(int id_venda, int id_produto, int id_cliente,int id_funcionario, String descricao, int qtd, float preco, String data, float total) {
         this.id_venda = id_venda;
         this.id_produto = id_produto;
         this.id_cliente = id_cliente;
+        this.id_funcionario=id_funcionario;
         this.descricao = descricao;
         this.qtd = qtd;
         this.preco = preco;
         this.data = data;
         this.total = total;
+    }
+    public Venda(){
+        
+    }
+
+    public int getId_funcionario() {
+        return id_funcionario;
+    }
+
+    public void setId_funcionario(int id_funcionario) {
+        this.id_funcionario = id_funcionario;
     }
 
     public int getId_venda() {

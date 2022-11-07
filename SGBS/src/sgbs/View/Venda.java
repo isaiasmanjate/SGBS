@@ -11,6 +11,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,7 +27,7 @@ import javax.swing.border.TitledBorder;
  *
  * @author Ricardo
  */
-public class Venda {
+public class Venda implements ActionListener{
      private GridBagConstraints constraints = new GridBagConstraints();
     private JFrame frame;
     private JPanel global ;
@@ -87,6 +89,8 @@ public class Venda {
             {"101","Bebida","10,00MT","2.0","20.00MT"},};
         tabela = new JTable(data, nomeColunas);
         configurar_JTable();
+        //Action Listener
+        b_procurar.addActionListener(this);
     }
     
     
@@ -205,6 +209,12 @@ public class Venda {
         l_preco.setText("Preço");
         tf_preco.setForeground(new java.awt.Color(0, 0, 0));
         tf_preco.setPreferredSize(new Dimension(100, 35));
+        
+        //Procurar
+        //b_cancelar.setPreferredSize(new Dimension(150, 25));
+        b_procurar.setBackground(new java.awt.Color(0, 134, 190));
+        b_procurar.setForeground(new java.awt.Color(255, 255, 255));
+       // b_cancelar.setPreferredSize(new Dimension(100, 30));
         
         //Quantidade
         l_quant.setFont(new java.awt.Font("Roboto Light", 1, 14));
@@ -332,5 +342,12 @@ public class Venda {
     
     public static void main(String[] args) {
         new Venda();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==b_procurar){
+            new Tabela_Produtos();
+        }
     }
 }

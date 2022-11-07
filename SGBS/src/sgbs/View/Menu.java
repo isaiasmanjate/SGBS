@@ -101,6 +101,7 @@ public class Menu implements ActionListener {
 
         principal.add(panelB, BorderLayout.EAST);
         principal.add(panelA, BorderLayout.WEST);
+        principal.setVisible(true);
         return principal;
     }
 
@@ -230,7 +231,7 @@ public class Menu implements ActionListener {
         addGB(panel, b_sair, 0, 9);
         principal.add(panel, BorderLayout.CENTER);
         principal.add(pane, BorderLayout.NORTH);
-
+        principal.setEnabled(false);
         return principal;
 
     }

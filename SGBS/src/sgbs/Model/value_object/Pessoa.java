@@ -22,6 +22,9 @@ public class Pessoa implements Serializable{
         this.morada = morada;
         this.nuit = nuit;
     }
+    public Pessoa(){
+        
+    }
 
     public long getNuit() {
         return nuit;

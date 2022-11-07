@@ -135,7 +135,7 @@ import javax.swing.border.TitledBorder;
         //Familia
         l_familia.setFont(new java.awt.Font("Roboto Light", 1, 14));
         l_familia.setForeground(new java.awt.Color(0, 0, 0));
-        l_familia.setText("Familia");
+        l_familia.setText("Nome");
         tf_familia.setForeground(new java.awt.Color(0, 0, 0));
         tf_familia.setPreferredSize(new Dimension(190, 35));
         
