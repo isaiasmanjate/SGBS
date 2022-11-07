@@ -36,6 +36,7 @@ public class ConnectionFactory {
         try {
             //Class.forName("com.mysql.jdbc.Driver");
             Class.forName("com.mysql.cj.jdbc.Driver");
+           // System.out.println("Conectado");
             return DriverManager.getConnection(URL, USER, PASS);
             
         } catch (ClassNotFoundException |SQLException ex) {

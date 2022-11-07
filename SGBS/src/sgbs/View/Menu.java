@@ -18,7 +18,7 @@ import javax.swing.border.TitledBorder;
 public class Menu implements ActionListener {
 
     JFrame frame;
-    JPanel Global;
+    JPanel Global,painelActual;
 
     JButton b_home, b_vendas, b_terceiros, b_artigos, b_listagens, b_configuracoes, b_stock, b_sair, b_home_closed, b_utlizador;
     GridBagConstraints constraints = new GridBagConstraints();
@@ -261,9 +261,22 @@ public class Menu implements ActionListener {
         }else if(e.getSource()==b_sair){
             frame.dispose();
         }else if(e.getSource()==b_vendas){
-            new Venda();
+            exemplo();
         }
             
     }
-
+     private void exemplo(){
+         Venda v=new Venda();
+        removerPainelCentral();
+         painelActual= (JPanel)v.retornaPainel();
+         Global.add(painelActual,BorderLayout.CENTER);
+         Global.setVisible(true);
+         frame.add(Global);
+         frame.setVisible(true);
+         
+         
+     }
+public void removerPainelCentral(){
+if(painelActual!=null){Global.remove(painelActual);}
+}
 }

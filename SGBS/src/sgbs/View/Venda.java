@@ -40,7 +40,7 @@ public class Venda implements ActionListener{
     
     public Venda() {
         inicializarComponentes();
-        configurarFrame();
+       // configurarFrame();
     }
     
     public void inicializarComponentes(){
@@ -92,14 +92,19 @@ public class Venda implements ActionListener{
         //Action Listener
         b_procurar.addActionListener(this);
     }
-    
-    
-    private void configurarFrame() {
+    public Component retornaPainel(){
         global = new JPanel();
         global.setLayout(new BorderLayout());
         global.add(painelNorte(), BorderLayout.NORTH);
         global.add(painelCentro(), BorderLayout.CENTER);
         global.add(painelSul(), BorderLayout.SOUTH);
+        
+        return global;
+    }
+    
+    
+    private void configurarFrame() {
+         //retornaPainel()
         frame.add(global);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
@@ -341,7 +346,7 @@ public class Venda implements ActionListener{
     
     
     public static void main(String[] args) {
-        new Venda();
+     //   new Venda();
     }
 
     @Override
