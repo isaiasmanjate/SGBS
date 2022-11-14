@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import sgbs.Connection.ConnectionFactory;
 import sgbs.Model.value_object.Familia;
+import sgbs.Model.value_object.Funcionario;
 
 /**
  *
@@ -52,6 +53,21 @@ public class FamiliaDao {
             ConnectionFactory.closeConnection(con, stnt, rs);
         }
         return familia;
+    }
+     public int lastId() {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stnt = null;
+        ResultSet rs = null;
+
+        int num = 0;
+        ArrayList<Familia> func = readAll();
+
+        for (int j = 0; j < func.size(); j++) {
+            if (j == (func.size() - 1)) {
+                num = func.get(j).getCodigo();
+            }
+        }
+        return num;
     }
     
 }

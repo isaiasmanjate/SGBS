@@ -10,11 +10,11 @@ import java.io.Serializable;
  *
  * @author Manjate
  */
-public class Funcionario extends Pessoa implements Serializable{
+public class Funcionario extends Pessoa{
        String username,password;
-       byte nivel;
+       String nivel;
 
-    public Funcionario(int codigo, String nome, String contacto, String morada, long nuit,String username,String password,byte nivel) {
+    public Funcionario(int codigo, String nome, String contacto, String morada, long nuit,String username,String password,String nivel) {
         super(codigo, nome, contacto, morada, nuit);
         this.username=username;
         this.password=password;
@@ -28,11 +28,11 @@ public class Funcionario extends Pessoa implements Serializable{
         return nuit;
     }
 
-    public byte getNivel() {
+    public String getNivel() {
         return nivel;
     }
 
-    public void setNivel(byte nivel) {
+    public void setNivel(String nivel) {
         this.nivel = nivel;
     }
 

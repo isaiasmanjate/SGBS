@@ -20,6 +20,7 @@ import sgbs.Model.value_object.Venda;
  * @author Manjate
  */
 public class FuncionarioDao {
+
     public boolean create(String sql) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stnt = null;
@@ -54,7 +55,7 @@ public class FuncionarioDao {
                 fn.setNuit(rs.getLong("nuit"));
                 fn.setUsername(rs.getString("username"));
                 fn.setPassword(rs.getString("password"));
-                fn.setNivel(rs.getByte("nivel"));
+                fn.setNivel(rs.getString("nivel"));
                 funcionario.add(fn);
             }
         } catch (SQLException ex) {
@@ -66,12 +67,11 @@ public class FuncionarioDao {
         return funcionario;
     }
 
-    public Funcionario getClienteById(int id) {
+    public Funcionario getFuncionarioById(int id) {
         Connection con = ConnectionFactory.getConnection();
 
         Funcionario fn = new Funcionario();
-        ArrayList<Funcionario> funcionario= readAll();
-
+        ArrayList<Funcionario> funcionario = readAll();
         for (int i = 0; i < funcionario.size(); i++) {
             if (id == funcionario.get(i).getCodigo()) {
                 fn.setCodigo(funcionario.get(i).getCodigo());
@@ -82,10 +82,11 @@ public class FuncionarioDao {
                 fn.setUsername(funcionario.get(i).getUsername());
                 fn.setPassword(funcionario.get(i).getPassword());
                 fn.setNivel(funcionario.get(i).getNivel());
-
-                funcionario.add(fn);
+             
             }
+           // System.out.println(fn.getNome());
         }
+           funcionario.add(fn);
         return fn;
 
     }
@@ -106,36 +107,53 @@ public class FuncionarioDao {
         return status;
 
     }
-    public boolean deleteFuncionarioById(int id){
-        Connection con=ConnectionFactory.getConnection();
-        PreparedStatement stnt=null;
+
+    public boolean deleteFuncionarioById(int id) {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stnt = null;
         //ResultSet rs=null;
         try {
-             
-            stnt=con.prepareStatement("Delete from funcionario where codigo= ?");
+
+            stnt = con.prepareStatement("Delete from funcionario where codigo= ?");
             stnt.setInt(1, id);
             stnt.executeUpdate();
             return true;
-        }  catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(ClienteDao.class.getName()).log(Level.SEVERE, null, ex);
             return false;
-        }finally{
-            ConnectionFactory.closeConnection( con, stnt);
+        } finally {
+            ConnectionFactory.closeConnection(con, stnt);
         }
-         
+
     }
-        public int lastId(){
-        Connection con=ConnectionFactory.getConnection();
-        PreparedStatement stnt=null;
-        ResultSet rs=null;
-        
+
+    public int lastId() {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stnt = null;
+        ResultSet rs = null;
+
         int num = 0;
         ArrayList<Funcionario> func = readAll();
-        
-        for(int j = 0; j < func.size(); j++){
-              if(j == (func.size() - 1))
-                  num = func.get(j).getCodigo();
+
+        for (int j = 0; j < func.size(); j++) {
+            if (j == (func.size() - 1)) {
+                num = func.get(j).getCodigo();
+            }
         }
         return num;
+    }
+
+    public boolean login(String username,String password) {
+
+        ArrayList<Funcionario> funcionario = readAll();
+        boolean login = false;
+        for (int i = 0; i < funcionario.size(); i++) {
+            if (password.equals(funcionario.get(i).getPassword())&&username.equals(funcionario.get(i).getUsername())) {
+                login = true;
+                
+            }
+        }
+        return login;
+
     }
 }

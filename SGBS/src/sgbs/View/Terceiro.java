@@ -126,8 +126,10 @@ public class Terceiro {
         constraints.anchor = GridBagConstraints.LINE_START;
 
         addGB(panel, c_terceiro, 0, 1);
-        addGB(panel, l_codigo, 2, 0);
-        addGB(panel, tf_codigo, 2, 1);
+        addGB(panel, l_codigo, 0, 2);
+        addGB(panel, tf_codigo, 0, 3);
+        addGB(panel, l_contacto, 2, 0);
+        addGB(panel, tf_contacto, 2, 1);
         addGB(panel, l_nome, 3, 0);
         addGB(panel, tf_nome, 3, 1);
         addGB(panel, b_lista, 1, 1);
@@ -190,6 +192,7 @@ public class Terceiro {
         l_codigo.setFont(new java.awt.Font("Roboto Light", 1, 14));
         tf_codigo.setForeground(new java.awt.Color(0, 0, 0));
         tf_codigo.setPreferredSize(new Dimension(150, 30));
+        tf_codigo.setEnabled(false);
         //Procurar
         b_apagar.setPreferredSize(new Dimension(100, 25));
         b_apagar.setBackground(new java.awt.Color(0, 134, 190));

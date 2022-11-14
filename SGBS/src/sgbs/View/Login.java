@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import sgbs.Controller.ControllerFuncionario;
 
 /**
  *
@@ -124,8 +125,30 @@ public class Login implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        new Menu();
-        janela.dispose();
+        if(e.getSource()==b_confirmar){
+            ControllerFuncionario ctrl=new ControllerFuncionario();
+            char[] password=passTxt.getPassword();
+            String pass="";
+            for(int i=0;i<password.length;i++){
+                pass+=password[i]+"";
+            }
+            
+            boolean login;
+            login=ctrl.login(userTxt.getText(),pass.trim());
+            if(login){
+             Menu m=new Menu();
+             m.b_utlizador.setText(userTxt.getText());
+             janela.dispose(); 
+             
+            }else{
+                
+                passTxt.setText("");
+               JOptionPane.showMessageDialog(null, "Credências Incorretos!");  
+            }
+            
+       
+
+        }
         
 
     }

@@ -27,7 +27,7 @@ public class Tabela_terceiros {
     private JTable tabelaCliente, tabelaFornecedor;
     private JLabel l_pesquisar;
     private sgbs.View.controles.textfield_suggestion.TextFieldSuggestion tf_pesquisar;
-    
+    sgbs.View.controles.MyButton.MyButtonSubmeter b_selecionar;
     public Tabela_terceiros() {
         inicializarComponentes();
         configurarFrame(); 
@@ -40,6 +40,15 @@ public class Tabela_terceiros {
         //Inicializar Pineis
         global = new JPanel();
         p_tabelas = new JPanel();
+        
+        b_selecionar=new sgbs.View.controles.MyButton.MyButtonSubmeter();
+        b_selecionar.setText("Selecionar");
+        b_selecionar.setPreferredSize(new Dimension(100, 25));
+        b_selecionar.setBackground(new java.awt.Color(0, 134, 190));
+        b_selecionar.setForeground(new java.awt.Color(255, 255, 255));
+        b_selecionar.setRadius(20);
+        b_selecionar.setBorder(null);
+        
         
         
         l_pesquisar = new JLabel();
@@ -60,12 +69,30 @@ public class Tabela_terceiros {
         tabelaFornecedor = new JTable(f_data, f_nomeColunas);
         configurar_tabelas();
     }
+     private Component painelSul() {
+        personalizarComponent();
+
+        JPanel principal = new JPanel();
+        JPanel panelB = new JPanel();
+        principal.setLayout(new BorderLayout());
+        principal.setBorder(new TitledBorder(LineBorder.createGrayLineBorder()));
+//        principal.setBorder(BorderFactory.createTitledBorder("Lista de bebidas"));
+        principal.setBackground(new java.awt.Color(255, 255, 255));
+        panelB.setBackground(new java.awt.Color(255, 255, 255));
+       // panelB.add(l_pesquisar);
+        panelB.add(b_selecionar);
+
+        principal.add(panelB, BorderLayout.EAST);
+
+        return principal;
+    }
     
     private void configurarFrame() {
         global = new JPanel();
         global.setLayout(new BorderLayout());
         global.add(painelNorte(), BorderLayout.NORTH);
         global.add(configurar_JTabbedPane(), BorderLayout.CENTER);
+             global.add(painelSul(),BorderLayout.SOUTH);
         frame.add(global);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));

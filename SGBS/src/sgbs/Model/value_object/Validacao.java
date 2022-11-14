@@ -41,7 +41,7 @@ public class Validacao {
     
     public boolean valNuit(String num) {
         txt=num;
-        if(txt.length()<13 || txt.length()>13){
+        if(txt.length()<13|| txt.length()>13){
             return false;
         }else
             return true;

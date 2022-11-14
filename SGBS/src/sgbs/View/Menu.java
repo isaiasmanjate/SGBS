@@ -262,7 +262,10 @@ public class Menu implements ActionListener {
             frame.dispose();
         }else if(e.getSource()==b_vendas){
             exemplo();
+        }else if(e.getSource()==b_configuracoes){
+            new ViewFuncionario();
         }
+        
             
     }
      private void exemplo(){
