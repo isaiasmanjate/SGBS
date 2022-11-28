@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import sgbs.Connection.ConnectionFactory;
+import sgbs.Model.value_object.Familia;
 import sgbs.Model.value_object.SubFamilia;
 
 /**
@@ -56,4 +57,56 @@ public class SubFamiliaDao {
         }
         return subFamilia;
     }
+     public int lastId() {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stnt = null;
+        ResultSet rs = null;
+
+        int num = 0;
+        ArrayList<SubFamilia> func = readAll();
+
+        for (int j = 0; j < func.size(); j++) {
+            if (j == (func.size() - 1)) {
+                num = func.get(j).getCodigo_subfamilia();
+            }
+        }
+        return num;
+    }
+     public SubFamilia getSubFamiliaById(int id) {
+        Connection con = ConnectionFactory.getConnection();
+
+        SubFamilia fam = new SubFamilia();
+        ArrayList<SubFamilia> familia = readAll();
+
+        for (int i = 0; i < familia.size(); i++) {
+            if (id == familia.get(i).getCodigo_subfamilia()) {
+                fam.setCodigo_subfamilia(familia.get(i).getCodigo_subfamilia());
+                fam.setSubFamilia_nome(familia.get(i).getSubFamilia_nome());
+                fam.setSubfamilia_descricao(familia.get(i).getSubfamilia_descricao());
+                fam.setCodigo(familia.get(i).getCodigo());
+           
+               
+            }
+        }
+         familia.add(fam);
+        return fam;
+
+    }
+        public boolean verifyId(int id) {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stnt = null;
+        ResultSet rs = null;
+        boolean status = false;
+
+        ArrayList<SubFamilia> familia = readAll();
+
+        for (int j = 0; j < familia.size(); j++) {
+            if (id == familia.get(j).getCodigo_subfamilia()) {
+                status = true;
+            }
+        }
+        return status;
+
+    }
+    
 }

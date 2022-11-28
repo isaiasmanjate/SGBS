@@ -8,15 +8,27 @@ package sgbs.Model.value_object;
  *
  * @author Manjate
  */
-public class SubFamilia extends Familia {
+public class SubFamilia {
        int codigo_subfamilia;
        String SubFamilia_nome;
        String subFamilia_descricao;
-       
-    public SubFamilia(int codigo, String familia,String descricao,int codigo_subfamilia,String SubFamilia_nome,String subFamilia_descricao) {
-        super(codigo, familia, descricao);
+       int codigo;
+//       
+//    public SubFamilia(int codigo, String familia,String descricao,int codigo_subfamilia,String SubFamilia_nome,String subFamilia_descricao) {
+//        super(codigo, familia, descricao);
+//        this.codigo_subfamilia=codigo_subfamilia;
+//        this.SubFamilia_nome=SubFamilia_nome;
+//        this.subFamilia_descricao=subFamilia_descricao;
+//    }
+      public SubFamilia(int codigo_subfamilia,String SubFamilia_nome,String subFamilia_descricao,int codigoFamilia) {
         this.codigo_subfamilia=codigo_subfamilia;
         this.subFamilia_descricao=subFamilia_descricao;
+        this.codigo=codigoFamilia;
+        this.SubFamilia_nome=SubFamilia_nome;
+    }
+
+    public String getSubFamilia_descricao() {
+        return subFamilia_descricao;
     }
 
     public int getCodigo_subfamilia() {
@@ -56,21 +68,7 @@ public class SubFamilia extends Familia {
         this.codigo = codigo;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+   
     
 
 

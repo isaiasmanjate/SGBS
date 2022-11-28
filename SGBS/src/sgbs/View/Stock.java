@@ -29,7 +29,7 @@ public class Stock implements ActionListener {
 
     public Stock() {
         inicialializarComponentes();
-        configurarFrame();
+       // configurarFrame();
     }
 
     private void inicialializarComponentes() {
@@ -81,6 +81,13 @@ public class Stock implements ActionListener {
         
         tf_codigo.addActionListener(this);
 
+    }
+    public JPanel retornaPainel(){
+         global = new JPanel();
+        global.setLayout(new BorderLayout());
+        global.add(painelNorte(), BorderLayout.NORTH);
+        global.add(painelCentro(), BorderLayout.CENTER);
+        global.add(painelSul(), BorderLayout.SOUTH);return global;
     }
 
     private void configurarFrame() {
@@ -144,10 +151,10 @@ public class Stock implements ActionListener {
         principal.setBackground(new java.awt.Color(255, 255, 255));
         panel.setBackground(new java.awt.Color(255, 255, 255));
         panelB.setBackground(new java.awt.Color(255, 255, 255));
-        constraints.insets = new Insets(12, 10, 0, 10);
-        constraints.fill = GridBagConstraints.BOTH;
-//        constraints.weightx=1;
-//        constraints.weighty=1;
+        constraints.insets = new Insets(2, 2, 3, 2);
+       // constraints.fill = GridBagConstraints.BOTH;
+       //constraints.weightx=1;
+        constraints.weighty=1;
         //adicionar informacoes do fornecedor
         constraints.anchor = GridBagConstraints.LINE_START;
 
@@ -177,7 +184,8 @@ public class Stock implements ActionListener {
         addGB(panelB, new JLabel(" "), 3, 3);
 
         principal.add(panel, BorderLayout.NORTH);
-        principal.add(panelB, BorderLayout.CENTER);
+        principal.add(panelB, BorderLayout.SOUTH);
+        
         return principal;
     }
 
@@ -234,7 +242,7 @@ public class Stock implements ActionListener {
         tf_codigo.setForeground(new java.awt.Color(0, 0, 0));
         tf_codigo.setPreferredSize(new Dimension(150, 30));
         //Procurar
-        b_procurar.setPreferredSize(new Dimension(28, 25));
+        b_procurar.setPreferredSize(new Dimension(25, 20));
         b_procurar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sgbs/View/images/listagem.png")));
         b_procurar.setBackground(new java.awt.Color(0, 134, 190));
 

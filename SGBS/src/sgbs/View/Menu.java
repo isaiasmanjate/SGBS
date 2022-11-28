@@ -18,7 +18,7 @@ import javax.swing.border.TitledBorder;
 public class Menu implements ActionListener {
 
     JFrame frame;
-    JPanel Global,painelActual;
+    JPanel Global, painelActual;
 
     JButton b_home, b_vendas, b_terceiros, b_artigos, b_listagens, b_configuracoes, b_stock, b_sair, b_home_closed, b_utlizador;
     GridBagConstraints constraints = new GridBagConstraints();
@@ -60,12 +60,10 @@ public class Menu implements ActionListener {
         b_artigos.addActionListener(this);
         b_terceiros.addActionListener(this);
         b_home_closed.addActionListener(this);
-        
 
         //Label
         l_logotipo = new JLabel("Alex Bottle Store");
 
-      
     }
 
     private void configurarFrame() {
@@ -250,36 +248,82 @@ public class Menu implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == b_stock) {
-             new Stock();
-        }else if(e.getSource()==b_artigos){
-            new Produto();
-        }else if(e.getSource()==b_utlizador){
+            viewStock();
+        } else if (e.getSource() == b_artigos) {
+            viewProduto();
+        } else if (e.getSource() == b_utlizador) {
             new Login();
             frame.dispose();
-        }else if(e.getSource()==b_terceiros){
-            new Terceiro();
-        }else if(e.getSource()==b_sair){
+        } else if (e.getSource() == b_terceiros) {
+             viewTerceiro();
+        } else if (e.getSource() == b_sair) {
             frame.dispose();
-        }else if(e.getSource()==b_vendas){
-            exemplo();
-        }else if(e.getSource()==b_configuracoes){
-            new ViewFuncionario();
-        }
-        
+        } else if (e.getSource() == b_vendas) {
+            viewVendas();
+        } else if (e.getSource() == b_configuracoes) {
             
+            viewFuncionario();
+        }
+
     }
-     private void exemplo(){
-         Venda v=new Venda();
+
+    private void viewVendas() {
+        Venda v = new Venda();
         removerPainelCentral();
-         painelActual= (JPanel)v.retornaPainel();
-         Global.add(painelActual,BorderLayout.CENTER);
-         Global.setVisible(true);
-         frame.add(Global);
-         frame.setVisible(true);
-         
-         
-     }
-public void removerPainelCentral(){
-if(painelActual!=null){Global.remove(painelActual);}
-}
-}
+        painelActual = (JPanel) v.retornaPainel();
+        Global.add(painelActual, BorderLayout.CENTER);
+        Global.setVisible(true);
+        frame.add(Global);
+        frame.setVisible(true);
+
+    }
+
+    public void removerPainelCentral() {
+        JPanel p = new JPanel();
+        if (painelActual != null) {
+            Global.remove(painelActual);
+
+        }
+    }
+
+    private void viewFuncionario() {
+        ViewFuncionario v = new ViewFuncionario();
+        removerPainelCentral();
+        painelActual = (JPanel) v.retornaPainel();
+        Global.add(painelActual, BorderLayout.CENTER);
+        Global.setVisible(true);
+        frame.add(Global);
+        frame.setVisible(true);
+
+    }
+        private void viewTerceiro() {
+        Terceiro v = new Terceiro();
+        removerPainelCentral();
+        painelActual = (JPanel) v.retornarPainel();
+        Global.add(painelActual, BorderLayout.CENTER);
+        Global.setVisible(true);
+        frame.add(Global);
+        frame.setVisible(true);
+
+    }
+    private void viewProduto() {
+        Produto v = new Produto();
+        removerPainelCentral();
+        painelActual = (JPanel) v.retornaPainel();
+        Global.add(painelActual, BorderLayout.CENTER);
+        Global.setVisible(true);
+        frame.add(Global);
+        frame.setVisible(true);
+
+    }
+
+  private void viewStock() {
+        Stock v = new Stock();
+        removerPainelCentral();
+        painelActual = (JPanel) v.retornaPainel();
+        Global.add(painelActual, BorderLayout.CENTER);
+        Global.setVisible(true);
+        frame.add(Global);
+        frame.setVisible(true);
+
+    }}

@@ -39,7 +39,7 @@ public class ViewFuncionario  implements ActionListener{
 
     public ViewFuncionario() {
         inicialializarComponentes();
-        configurarFrame();
+        //configurarFrame();
     }
      
 
@@ -88,13 +88,17 @@ public class ViewFuncionario  implements ActionListener{
         b_lista.addActionListener(this);
         b_apagar.addActionListener(this);
     }
-
-    private void configurarFrame() {
-        global = new JPanel();
+    public JPanel retornaPainel(){
+       global = new JPanel();
         global.setLayout(new BorderLayout());
         global.add(painelNorte(), BorderLayout.NORTH);
         global.add(painelCentro(), BorderLayout.CENTER);
         global.add(painelSul(), BorderLayout.SOUTH);
+        return global;
+    }
+
+    private void configurarFrame() {
+       
         frame.add(global);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -314,7 +318,7 @@ public class ViewFuncionario  implements ActionListener{
             }
         }
         if(e.getSource()==b_lista){
-            new Tabela_Funcionario();
+            new Tabela_Funcionario(this);
             frame.dispose();
         }
         if(e.getSource()==b_apagar){

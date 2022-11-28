@@ -1,15 +1,18 @@
 package sgbs.View;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import sgbs.Controller.ControllerFamilia;
 /**
  *
  * @author Ricardo
  */
 
     
-    public class Familia {
+    public class Familia  implements ActionListener{
       private GridBagConstraints constraints = new GridBagConstraints();
     private JFrame frame;
     private JPanel global;
@@ -41,6 +44,9 @@ import javax.swing.border.TitledBorder;
         b_cancelar = new JButton("Cancelar");
         b_gravar = new JButton("Gravar");
         b_terminar = new JButton("Terminar");
+        
+        //Evento
+        b_gravar.addActionListener(this);
     }
     
     private void configurarFrame() {
@@ -178,4 +184,34 @@ import javax.swing.border.TitledBorder;
     public static void main(String[] args) {
         new Familia();
     }
-}
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==b_gravar){
+        
+            boolean scc=false;
+             ControllerFamilia ctr=new ControllerFamilia();
+            
+            try{
+                if(b_gravar.getText().equalsIgnoreCase("Gravar")){
+                    
+                scc=ctr.cadastrar(ctr.gerador(),tf_familia.getText(),tf_descricao.getText());
+                }
+                if(scc){
+                        
+                        JOptionPane.showMessageDialog(null, "Realizado Com Sucesso!");
+                        //this.frame.dispose();
+                        tf_descricao.setText("");
+                        tf_familia.setText("");
+                } else{
+                        JOptionPane.showMessageDialog(null, "Os Campos não foram preenchidos Correctamente!");
+                }
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null, "ERRO:"+ex);
+            }
+       
+        }
+        }
+    }
+
+

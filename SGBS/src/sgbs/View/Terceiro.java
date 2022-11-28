@@ -27,7 +27,7 @@ public class Terceiro {
 
     public Terceiro() {
         inicialializarComponentes();
-        configurarFrame();
+      //  configurarFrame();
     }
 
     private void inicialializarComponentes() {
@@ -64,13 +64,17 @@ public class Terceiro {
         //b_lista.setBorder(new RoundedBorder(20));
 
     }
-
-    private void configurarFrame() {
+    public JPanel retornarPainel(){
         global = new JPanel();
         global.setLayout(new BorderLayout());
         global.add(painelNorte(), BorderLayout.NORTH);
         global.add(painelCentro(), BorderLayout.CENTER);
         global.add(painelSul(), BorderLayout.SOUTH);
+        return global;
+    }
+
+    private void configurarFrame() {
+        
         frame.add(global);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

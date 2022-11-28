@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import sgbs.Connection.ConnectionFactory;
+import sgbs.Model.value_object.Cliente;
 import sgbs.Model.value_object.Familia;
 import sgbs.Model.value_object.Funcionario;
 
@@ -45,6 +46,7 @@ public class FamiliaDao {
               fm.setCodigo(rs.getInt("codigo"));
               fm.setNome(rs.getString("nome"));
               fm.setDescricao(rs.getString("descricao"));
+              familia.add(fm);
             }
 
         } catch (SQLException ex) {
@@ -61,13 +63,48 @@ public class FamiliaDao {
 
         int num = 0;
         ArrayList<Familia> func = readAll();
-
         for (int j = 0; j < func.size(); j++) {
             if (j == (func.size() - 1)) {
                 num = func.get(j).getCodigo();
             }
         }
         return num;
+    }
+        public Familia getFamiliaById(int id) {
+        Connection con = ConnectionFactory.getConnection();
+
+        Familia fam = new Familia();
+        ArrayList<Familia> familia = readAll();
+
+        for (int i = 0; i < familia.size(); i++) {
+            if (id == familia.get(i).getCodigo()) {
+                fam.setCodigo(familia.get(i).getCodigo());
+                fam.setNome(familia.get(i).getNome());
+                fam.setDescricao(familia.get(i).getDescricao());
+           
+             
+              //  System.out.println("Ola");
+            }
+        }
+           familia.add(fam);
+        return fam;
+
+    }
+        public boolean verifyId(int id) {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stnt = null;
+        ResultSet rs = null;
+        boolean status = false;
+
+        ArrayList<Familia> familia = readAll();
+
+        for (int j = 0; j < familia.size(); j++) {
+            if (id == familia.get(j).getCodigo()) {
+                status = true;
+            }
+        }
+        return status;
+
     }
     
 }

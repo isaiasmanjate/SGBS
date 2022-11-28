@@ -40,15 +40,21 @@ public class Tabela_Funcionario implements ActionListener{
     JScrollPane scrollClient;
     DefaultTableModel fn;
       Vector fun;
+      ViewFuncionario funcionario;
       
     private sgbs.View.controles.textfield_suggestion.TextFieldSuggestion tf_pesquisar;
     sgbs.View.controles.MyButton.MyButtonSubmeter b_selecionar,b_pesquisar;
     
-    public Tabela_Funcionario() {
+    public Tabela_Funcionario(ViewFuncionario funcionario) {
         inicializarComponentes();
-        configurarFrame(); 
+        configurarFrame();
+       this.funcionario=funcionario;
         }
     
+    public Tabela_Funcionario(){
+          inicializarComponentes();
+        configurarFrame(); 
+    }
      private void inicializarComponentes(){
         frame = new JFrame("Lista Funcionario");
         frame.setResizable(false);
@@ -205,7 +211,6 @@ public class Tabela_Funcionario implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==b_selecionar){
             int index=  tabela.getSelectedRow();
-            ViewFuncionario funcionario=new ViewFuncionario();
             ControllerFuncionario ctrl=new ControllerFuncionario();
              Funcionario f=ctrl.getFunById(index+1);
              funcionario.tf_codigo.setText(f.getCodigo()+"");

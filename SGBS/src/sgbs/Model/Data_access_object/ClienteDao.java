@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import sgbs.Model.value_object.Cliente;
 import sgbs.Connection.ConnectionFactory;
+import sgbs.Model.value_object.Funcionario;
 
 /**
  *
@@ -117,6 +118,21 @@ public class ClienteDao {
             ConnectionFactory.closeConnection( con, stnt, rs);
         }
          
+    }
+        public int lastId() {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stnt = null;
+        ResultSet rs = null;
+
+        int num = 0;
+        ArrayList<Cliente> func = readAll();
+
+        for (int j = 0; j < func.size(); j++) {
+            if (j == (func.size() - 1)) {
+                num = func.get(j).getCodigo();
+            }
+        }
+        return num;
     }
 
 }

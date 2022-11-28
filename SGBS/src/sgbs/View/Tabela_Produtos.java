@@ -120,7 +120,7 @@ public class Tabela_Produtos {
     }
     
     private void configurar_tabelas() {
-        tabela.setPreferredScrollableViewportSize(new Dimension(660, 150));
+      //  tabela.setPreferredScrollableViewportSize(new Dimension(660, 150));
         tabela.setFillsViewportHeight(true);
 //        tabela.getTableHeader().setPreferredSize(new Dimension(890, 35));
         tabela.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
@@ -132,9 +132,9 @@ public class Tabela_Produtos {
     
     public Component configurar_TabelaCliente() {
         JPanel lista = new JPanel();
-        lista.setLayout(new FlowLayout(FlowLayout.TRAILING));
+        lista.setLayout(new FlowLayout(FlowLayout.CENTER));
         JScrollPane scrollPane =  new JScrollPane(tabela);
-        scrollPane.setPreferredSize(new Dimension(750, 340));
+        //scrollPane.setPreferredSize(new Dimension(1000, 340));
         
         tabela.setFocusable(false);
         tabela.setIntercellSpacing(new java.awt.Dimension(0, 0));

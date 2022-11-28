@@ -1,34 +1,42 @@
 package sgbs.View;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Vector;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import sgbs.Controller.ControllerFamilia;
+import sgbs.Controller.ControllerSubFamilia;
+import sgbs.Model.value_object.Familia;
+
 /**
  *
  * @author Ricardo
  */
-public class SubFamilia {
-   
-       private GridBagConstraints constraints = new GridBagConstraints();
+public class SubFamilia implements ActionListener {
+
+    private GridBagConstraints constraints = new GridBagConstraints();
     private JFrame frame;
     private JPanel global;
-    private JLabel l_codigo, l_familia,l_descricao, l_subFamilia, favicon, l_titulo_frame, espaco;
-    private sgbs.View.controles.textfield_suggestion.TextFieldSuggestion tf_codigo, tf_subFamilia,tf_descricao;
+    private JLabel l_codigo, l_familia, l_descricao, l_subFamilia, favicon, l_titulo_frame, espaco;
+    private sgbs.View.controles.textfield_suggestion.TextFieldSuggestion tf_codigo, tf_subFamilia, tf_descricao;
     private JButton b_gravar, b_cancelar, b_terminar;
     private sgbs.View.controles.combo_suggestion.ComboBoxSuggestion c_familia;
-    
+
     private SubFamilia() {
         inicializarComponentes();
         configurarFrame();
-        
+
     }
-    
-    private void inicializarComponentes(){
+
+    private void inicializarComponentes() {
         frame = new JFrame("Criacao de Sub Familia");
         frame.setResizable(false);
-        
+
         global = new JPanel();
-        
+
         l_codigo = new JLabel();
         l_familia = new JLabel();
         l_subFamilia = new JLabel();
@@ -36,19 +44,34 @@ public class SubFamilia {
         l_titulo_frame = new JLabel();
         favicon = new JLabel();
         espaco = new JLabel();
-        
+
         tf_codigo = new sgbs.View.controles.textfield_suggestion.TextFieldSuggestion();
         tf_subFamilia = new sgbs.View.controles.textfield_suggestion.TextFieldSuggestion();
         tf_descricao = new sgbs.View.controles.textfield_suggestion.TextFieldSuggestion();
-        
+
         //Inicializar Botoes
         b_cancelar = new JButton("Cancelar");
         b_gravar = new JButton("Gravar");
         b_terminar = new JButton("Terminar");
-        
+        b_gravar.addActionListener(this);
         c_familia = new sgbs.View.controles.combo_suggestion.ComboBoxSuggestion();
+            ControllerSubFamilia ctr=new ControllerSubFamilia();
+            ControllerFamilia ctrl=new ControllerFamilia();
+            int tamanho = ctrl.gerador();
+            int size=ctr.gerador();
+            tf_codigo.setText(size+"");
+            tf_codigo.setEnabled(false);
+        
+            Familia f;
+            c_familia.addItem("");
+                c_familia.setSelectedIndex(0);
+           // System.out.println(tamanho);
+                    for (int i = 1; i < tamanho; i++) {
+                       f= ctrl.getFamById(i);
+                  c_familia.addItem(f.getNome());
+                   }
     }
-    
+
     private void configurarFrame() {
         global = new JPanel();
         global.setLayout(new BorderLayout());
@@ -60,10 +83,10 @@ public class SubFamilia {
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
         frame.pack();
         frame.setLocationRelativeTo(null);
-   
+
         frame.setVisible(true);
     }
-    
+
     private Component painelNorte() {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.LEADING));
@@ -79,13 +102,13 @@ public class SubFamilia {
 
         return panel;
     }
-    
+
     private void addGB(JPanel panel, Component component, int x, int y) {
         constraints.gridx = x;
         constraints.gridy = y;
         panel.add(component, constraints);
     }
-    
+
     private Component painelCentro() {
         personalizarComponent();
 
@@ -104,7 +127,7 @@ public class SubFamilia {
         constraints.insets = new Insets(12, 10, 0, 10);
 //        constraints.fill = GridBagConstraints.BOTH;
         constraints.anchor = GridBagConstraints.LINE_END;
-        
+
         //adicionar atributos da Familia
         addGB(panel, espaco, 2, 0);
         addGB(panel, l_codigo, 0, 0);
@@ -117,51 +140,50 @@ public class SubFamilia {
         constraints.gridwidth = 2;
         constraints.fill = GridBagConstraints.HORIZONTAL;
         addGB(panel, tf_descricao, 1, 3);
-        
+
         panelB.add(b_gravar);
         panelB.add(espaco);
         panelB.add(b_cancelar);
-        
+
         principal.add(panel, BorderLayout.NORTH);
         principal.add(panelB, BorderLayout.LINE_END);
-        
+
         return principal;
-        
-        
+
     }
-    
+
     private void personalizarComponent() {
-        
+
         //Espaco
         espaco.setText("     ");
-        
+
         //Descricao
         l_codigo.setFont(new java.awt.Font("Roboto Light", 1, 14));
         l_codigo.setForeground(new java.awt.Color(0, 0, 0));
         l_codigo.setText("Codigo");
         tf_codigo.setForeground(new java.awt.Color(0, 0, 0));
         tf_codigo.setPreferredSize(new Dimension(190, 35));
-        
+
         //Descricao
         l_descricao.setFont(new java.awt.Font("Roboto Light", 1, 14));
         l_descricao.setForeground(new java.awt.Color(0, 0, 0));
         l_descricao.setText("Descrição");
         tf_descricao.setForeground(new java.awt.Color(0, 0, 0));
         tf_descricao.setPreferredSize(new Dimension(390, 35));
-        
+
         //Familia Sub Familia
         l_subFamilia.setFont(new java.awt.Font("Roboto Light", 1, 14));
         l_subFamilia.setForeground(new java.awt.Color(0, 0, 0));
         l_subFamilia.setText("Nome");
         tf_subFamilia.setForeground(new java.awt.Color(0, 0, 0));
         tf_subFamilia.setPreferredSize(new Dimension(190, 35));
-        
+
         //Familia 
         l_familia.setFont(new java.awt.Font("Roboto Light", 1, 14));
         l_familia.setForeground(new java.awt.Color(0, 0, 0));
         l_familia.setText("Familia");
         c_familia.setPreferredSize(new Dimension(190, 35));
-        
+
         //Confirmar
         b_gravar.setPreferredSize(new Dimension(100, 25));
         b_gravar.setBackground(new java.awt.Color(0, 134, 190));
@@ -178,7 +200,7 @@ public class SubFamilia {
         b_cancelar.setForeground(new java.awt.Color(255, 255, 255));
         b_cancelar.setPreferredSize(new Dimension(100, 30));
     }
-    
+
     private Component painelSul() {
         personalizarComponent();
         constraints.insets = new Insets(2, 10, 2, 10);
@@ -198,8 +220,54 @@ public class SubFamilia {
 
         return principal;
     }
-    
+
     public static void main(String[] args) {
         new SubFamilia();
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == b_gravar) {
+            boolean scc = false;
+            
+            ControllerSubFamilia ctr = new ControllerSubFamilia();
+        
+            try {
+                if(c_familia.getSelectedIndex()!=0){
+                if (b_gravar.getText().equalsIgnoreCase("Gravar")) {
+                    int codigoFamilia=-1;
+                    ControllerFamilia ctrl = new ControllerFamilia();
+                    sgbs.Model.value_object.Familia f;
+                        int size=ctrl.gerador();
+                    for (int i = 1; i < size; i++) {
+                        f = ctrl.getFamById(i);
+                        if (c_familia.getSelectedItem().toString().trim().equalsIgnoreCase(f.getNome())) {
+                            codigoFamilia = f.getCodigo();
+                            System.out.println(codigoFamilia);
+                        }
+
+                    }
+                    scc = ctr.cadastrar(ctr.gerador(), tf_subFamilia.getText(), tf_descricao.getText(),codigoFamilia);
+                }
+                if (scc) {
+
+                    JOptionPane.showMessageDialog(null, "Realizado Com Sucesso!");
+                    //this.frame.dispose();
+                    int size=ctr.gerador();
+                    tf_descricao.setText("");
+                    tf_subFamilia.setText("");
+                    tf_codigo.setText(size+1+"");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Os Campos não foram preenchidos Correctamente!");
+                }
+                }else{
+                     JOptionPane.showMessageDialog(null, "O campo familia na foi selecionado");
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "ERRO:" + ex);
+            }
+
+        }
+    }
 }
+
