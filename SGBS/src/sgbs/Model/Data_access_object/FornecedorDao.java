@@ -76,9 +76,9 @@ public class FornecedorDao {
                 fc.setMorada(fornecedor.get(i).getMorada());
                 fc.setNuit(fornecedor.get(i).getNuit());
 
-                fornecedor.add(fc);
+               
             }
-        }
+        } fornecedor.add(fc);
         return fc;
 
     }
@@ -117,4 +117,19 @@ public class FornecedorDao {
         }
          
     } 
+         public int lastId() {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stnt = null;
+        ResultSet rs = null;
+
+        int num = 0;
+        ArrayList<Fornecedor> func = readAll();
+
+        for (int j = 0; j < func.size(); j++) {
+            if (j == (func.size() - 1)) {
+                num = func.get(j).getCodigo();
+            }
+        }
+        return num;
+    }
 }

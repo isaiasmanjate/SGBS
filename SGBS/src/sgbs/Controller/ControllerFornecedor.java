@@ -6,83 +6,24 @@ package sgbs.Controller;
 
 import java.util.Vector;
 import javax.swing.JOptionPane;
-import sgbs.Model.Business_object.ManageCliente;
-import sgbs.Model.Data_access_object.ClienteDao;
-import sgbs.Model.value_object.Cliente;
-import sgbs.Model.value_object.Funcionario;
+import sgbs.Model.Business_object.ManageFornecedor;
+import sgbs.Model.Data_access_object.FornecedorDao;
+import sgbs.Model.value_object.Fornecedor;
 import sgbs.Model.value_object.Validacao;
 
 /**
  *
  * @author Manjate
  */
-public class ControllerCliente {
-
-    Validacao vd;
-
-    public Validacao getVd() {
-        return vd;
-    }
-
-    public void setVd(Validacao vd) {
-        this.vd = vd;
-    }
-
-    public Cliente getFn() {
-        return fn;
-    }
-
-    public void setFn(Cliente fn) {
-        this.fn = fn;
-    }
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getContacto() {
-        return contacto;
-    }
-
-    public void setContacto(String contacto) {
-        this.contacto = contacto;
-    }
-
-    public String getMorada() {
-        return morada;
-    }
-
-    public void setMorada(String morada) {
-        this.morada = morada;
-    }
-
-    public long getNuit() {
-        return nuit;
-    }
-
-    public void setNuit(long nuit) {
-        this.nuit = nuit;
-    }
-    Cliente fn;
-
+public class ControllerFornecedor {
+     Fornecedor fn;
+     Validacao vd;
     int codigo;
     String nome, contacto, morada;
     long nuit;
 
     public int gerador() {
-        ClienteDao fdao = new ClienteDao();
+        FornecedorDao fdao = new FornecedorDao();
         int num = fdao.lastId() + 1;
         return num;
     }
@@ -90,12 +31,12 @@ public class ControllerCliente {
     public boolean cadastrar(int codigo, String nome, String contacto, String morada, long nuit) {
         boolean status = false;
         vd = new Validacao();
-       // System.out.println("ola");
+     //   System.out.println("ola");
         if (vd.valTxt(nome, 3, 50) && vd.valTxt(contacto, 9, 9) && vd.valTxt(morada, 3, 45)
                 && vd.valNuit(nuit + "")) {
 
-            fn = new Cliente(codigo, nome, contacto, morada, nuit);
-            ManageCliente mF = new ManageCliente();
+            fn = new Fornecedor(codigo, nome, contacto, morada, nuit);
+            ManageFornecedor mF = new ManageFornecedor();
             mF.salvar(fn);
             status = true;
 
@@ -109,8 +50,8 @@ public class ControllerCliente {
         vd = new Validacao();
         boolean status = false;
         // if(vd.valTxt(password, 3,20)){
-        fn = new Cliente(codigo, nome, contacto, morada, nuit);
-        ManageCliente mF = new ManageCliente();
+        fn = new Fornecedor(codigo, nome, contacto, morada, nuit);
+        ManageFornecedor mF = new ManageFornecedor();
         status = mF.alterar(fn);
         //  }
         return status;
@@ -118,26 +59,26 @@ public class ControllerCliente {
     }
 
     public Vector listar() {
-        ClienteDao fdao = new ClienteDao();
+        FornecedorDao fdao = new FornecedorDao();
         int i = 0;
         Vector lst = new Vector();
-        for (Cliente fn : fdao.readAll()) {
+        for (Fornecedor fn : fdao.readAll()) {
             lst.add(new Object[]{fn.getCodigo(), fn.getNome(), fn.getContacto(), fn.getMorada(), fn.getNuit()});
             i++;
         }
         return lst;
     }
 
-    public Cliente getFunById(int codigo) {
-        ClienteDao fdao = new ClienteDao();
-        Cliente f = fdao.getClienteById(codigo);
+    public Fornecedor getFunById(int codigo) {
+        FornecedorDao fdao = new FornecedorDao();
+        Fornecedor f = fdao.getFornecedorById(codigo);
         return f;
     }
 
 
     public boolean encontrar(int id) {
-        ManageCliente mF = new ManageCliente();
-        Cliente fn;
+        ManageFornecedor mF = new ManageFornecedor();
+        Fornecedor fn;
         if (mF.search(id)) {
             fn = mF.getCliente();
             this.codigo = fn.getCodigo();
@@ -151,8 +92,8 @@ public class ControllerCliente {
 
     public boolean remover(int id) {
         try {
-            ClienteDao fdao = new ClienteDao();
-            boolean scc = fdao.deleteClienteById(id);
+            FornecedorDao fdao = new FornecedorDao();
+            boolean scc = fdao.deleteFornecedorById(id);
             if (scc) {
                 return true;
             } else {

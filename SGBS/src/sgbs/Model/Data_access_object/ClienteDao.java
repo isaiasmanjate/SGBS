@@ -44,7 +44,7 @@ public class ClienteDao {
         ResultSet rs = null;
         ArrayList<Cliente> cliente = new ArrayList<>();
         try {
-            stnt = con.prepareStatement("Select *  from clientes");
+            stnt = con.prepareStatement("Select *  from cliente");
             rs = stnt.executeQuery();
             while (rs.next()) {
                 Cliente cl = new Cliente();
@@ -78,9 +78,9 @@ public class ClienteDao {
                 cl.setMorada(cliente.get(i).getMorada());
                 cl.setNuit(cliente.get(i).getNuit());
 
-                cliente.add(cl);
+              
             }
-        }
+        }  cliente.add(cl);
         return cl;
 
     }

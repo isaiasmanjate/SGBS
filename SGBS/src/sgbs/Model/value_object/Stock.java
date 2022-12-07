@@ -20,7 +20,7 @@ public class Stock implements Serializable {
     int quantidade;
     float total;
 
-    public Stock(int codigo, int codigo_fornecedor,int codigo_produto, String Descricao, float preco_compra, int quantidade, float total) {
+    public Stock(int codigo,int codigo_produto, int codigo_fornecedor, String Descricao, float preco_compra, int quantidade, float total) {
         this.codigo = codigo;
         this.codigo_produto=codigo_produto;
         this.codigo_fornecedor = codigo_fornecedor;

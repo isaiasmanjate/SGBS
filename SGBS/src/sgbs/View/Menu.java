@@ -30,7 +30,9 @@ public class Menu implements ActionListener {
     //Stock stock=new Stock();
     public Menu() {
         inicializarComponents();
+      
         configurarFrame();
+       
 
     }
 
@@ -71,14 +73,17 @@ public class Menu implements ActionListener {
         Global.setLayout(new BorderLayout());
         Global.add(westPainel(), BorderLayout.WEST);
         Global.add(northPainel(), BorderLayout.NORTH);
+      
         Global.setBackground(color);
         frame.add(Global);
+        
         frame.setFont(new java.awt.Font("Roboto Light", 1, 20));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
-        frame.pack();
+        frame.pack();    
 
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+         viewHome();
         frame.setLocationRelativeTo(null);
 
         frame.setVisible(true);
@@ -261,8 +266,10 @@ public class Menu implements ActionListener {
         } else if (e.getSource() == b_vendas) {
             viewVendas();
         } else if (e.getSource() == b_configuracoes) {
+            viewConfiguracao();
             
-            viewFuncionario();
+        }else if(e.getSource()==b_home){
+            viewHome();
         }
 
     }
@@ -326,4 +333,26 @@ public class Menu implements ActionListener {
         frame.add(Global);
         frame.setVisible(true);
 
-    }}
+    }
+    private void viewHome(){
+        Home v = new Home();
+        removerPainelCentral();
+        painelActual = (JPanel) v.retornaPainel();
+        Global.add(painelActual, BorderLayout.CENTER);
+        Global.setVisible(true);
+        frame.add(Global);
+        frame.setVisible(true);
+
+    }
+       private void viewConfiguracao(){
+        Configuracoes v = new Configuracoes();
+        removerPainelCentral();
+        painelActual = (JPanel) v.retornaPainel();
+        Global.add(painelActual, BorderLayout.CENTER);
+        Global.setVisible(true);
+        frame.add(Global);
+        frame.setVisible(true);
+
+    }
+
+}

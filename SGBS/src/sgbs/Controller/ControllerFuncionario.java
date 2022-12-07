@@ -38,7 +38,7 @@ public class ControllerFuncionario {
     public boolean cadastrar(int codigo,String nome,String contacto,String morada,long nuit,String username,String password,String nivel){
         boolean status=false;
         vd=new Validacao();
-        System.out.println("ola");
+      //  System.out.println("ola");
        if(vd.valTxt(nome, 3, 50)&&vd.valTxt(contacto, 9, 9)&&vd.valTxt(morada, 3, 45)&&
                vd.valNuit(nuit+"")&&vd.valTxt(username, 3, 20)&&vd.valTxt(password, 3, 20)){
             

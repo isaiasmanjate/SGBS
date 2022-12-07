@@ -24,6 +24,7 @@ public class ManageStock {
         stDAO=new StockDao();
         boolean res=stDAO.create(sql);
         if(res){
+           // System.out.println(st.getCodigo_produto());
             ProdutoDao prDAO;
             String sqlP="Update produto set quantidade=quantidade+"+st.getQuantidade()+" where codigo="+st.getCodigo_produto();
             prDAO=new ProdutoDao();

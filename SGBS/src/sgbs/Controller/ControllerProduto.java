@@ -84,6 +84,26 @@ public class ControllerProduto {
         }
         return lst;
     }
+      public Vector listarP(){
+        ControllerFamilia f=new ControllerFamilia();
+         ControllerSubFamilia sf=new ControllerSubFamilia();
+         Familia familia;
+         SubFamilia subFamilia;
+         String nomeF="",nomeSF="";
+        ProdutoDao fdao=new ProdutoDao();
+        int i=0;
+        Vector lst=new Vector();
+        for(Produto fn:fdao.readAll()){
+            familia=f.getFamById(fn.getId_familia());
+            subFamilia=sf.getSubFamById(fn.getId_subfamilia());
+            nomeF=familia.getNome();
+            nomeSF=subFamilia.getSubFamilia_nome();
+            
+            lst.add(new Object[]{fn.getId_produto(),nomeF,nomeSF,fn.getDescricao(),fn.getPreco_venda(),fn.getQuantidade()});
+            i++;
+        }
+        return lst;
+    }
     public Produto getFunById(int codigo){
          ProdutoDao fdao=new ProdutoDao();
          Produto f=fdao.getProdutoById(codigo);

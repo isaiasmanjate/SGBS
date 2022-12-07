@@ -25,7 +25,7 @@ public class SubFamilia implements ActionListener {
     private JButton b_gravar, b_cancelar, b_terminar;
     private sgbs.View.controles.combo_suggestion.ComboBoxSuggestion c_familia;
 
-    private SubFamilia() {
+    public SubFamilia() {
         inicializarComponentes();
         configurarFrame();
 

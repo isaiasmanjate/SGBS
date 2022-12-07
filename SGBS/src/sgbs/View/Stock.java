@@ -12,8 +12,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+import sgbs.Controller.ControllerFornecedor;
+import sgbs.Controller.ControllerStock;
+import sgbs.Model.value_object.Fornecedor;
 
 public class Stock implements ActionListener {
 
@@ -22,14 +27,29 @@ public class Stock implements ActionListener {
 
     GridBagConstraints constraints = new GridBagConstraints();
     private sgbs.View.controles.combobox.Combobox c_Fornecedor;
-    private sgbs.View.controles.textfield_suggestion.TextFieldSuggestion tf_morada, tf_contacto, tf_nuit, tf_codigo, tf_preco, tf_qtd, tf_descricao;
+    sgbs.View.controles.textfield_suggestion.TextFieldSuggestion tf_morada, tf_contacto, tf_nuit, tf_codigo, tf_preco, tf_qtd, tf_descricao;
     private JLabel l_Fornecedor, l_morada, l_contacto, l_nuit, l_codigo, l_Descricao, l_Preco_custo, l_qtd, l_icon, l_titulo_frame;
-    private JButton b_confirmar, b_cancelar, b_terminar, b_procurar;
+    JButton b_confirmar, b_cancelar, b_terminar, b_procurar;
     private JTable tabela;
+    DefaultTableModel t;
+    Vector fun;
 
     public Stock() {
         inicialializarComponentes();
        // configurarFrame();
+    }
+
+    public void populaFornecedor() {
+        //Popula Familia
+        sgbs.Controller.ControllerFornecedor ctrl = new sgbs.Controller.ControllerFornecedor();
+        sgbs.Model.value_object.Fornecedor f;
+        c_Fornecedor.addItem("");
+        int tamanho = ctrl.gerador();
+        for (int i = 1; i < tamanho; i++) {
+            f = ctrl.getFunById(i);
+            c_Fornecedor.addItem(f.getNome());
+        }
+
     }
 
     private void inicialializarComponentes() {
@@ -45,9 +65,14 @@ public class Stock implements ActionListener {
         tf_contacto = new sgbs.View.controles.textfield_suggestion.TextFieldSuggestion();
         tf_nuit = new sgbs.View.controles.textfield_suggestion.TextFieldSuggestion();
         tf_codigo = new sgbs.View.controles.textfield_suggestion.TextFieldSuggestion();
+        tf_codigo.setEditable(false);
         tf_descricao = new sgbs.View.controles.textfield_suggestion.TextFieldSuggestion();
+        tf_descricao.setEditable(false);
         tf_preco = new sgbs.View.controles.textfield_suggestion.TextFieldSuggestion();
+        tf_preco.setEditable(false);
         tf_qtd = new sgbs.View.controles.textfield_suggestion.TextFieldSuggestion();
+        tf_qtd.setEditable(false);
+        
 
         //Inicializar Labels
         // l_Fornecedor = new JLabel("Fornecedor");
@@ -64,33 +89,73 @@ public class Stock implements ActionListener {
         //Inicializar Botoes
         b_cancelar = new JButton("Cancelar");
         b_confirmar = new JButton("Confirmar");
-        b_terminar = new JButton("Gravar");
+        b_terminar = new JButton("Imprimir");
         b_procurar = new JButton("");
+        b_confirmar.setEnabled(false);
+        b_terminar.setEnabled(false);
         // b_confirmar.setBorder(null);
 
         //Inicializar tabela
-        String[] header = {"Codigo", "Fornecedor", "Descrição", "Preço", "Qtd", "Total"};
-        Object[][] items = {{"001", "CDM", "Bebida", "0,00MT", "1.0", "0,00MT"}};
-        tabela = new JTable(items, header);
+        t = new DefaultTableModel();
+        t.addColumn("Codigo");
+        t.addColumn("Cod.Produto");
+        t.addColumn("Cod.Fornecedor");
+        t.addColumn("Descrição");
+        t.addColumn("preço");
+        t.addColumn("Quantidade");
+        t.addColumn("Total");
+
+        tabela = new JTable(t);
+        configurar_tabelas();
 
         //Listener
         b_cancelar.addActionListener(this);
         b_confirmar.addActionListener(this);
         b_terminar.addActionListener(this);
         b_procurar.addActionListener(this);
-        
+
         tf_codigo.addActionListener(this);
+        populaFornecedor();
+        //Eventos
+        c_Fornecedor.addActionListener(this);
 
     }
-    public JPanel retornaPainel(){
-         global = new JPanel();
+
+    private void configurar_tabelas() {
+        tabela.setPreferredScrollableViewportSize(new Dimension(660, 150));
+        tabela.setFillsViewportHeight(true);
+//        tabela.getTableHeader().setPreferredSize(new Dimension(890, 35));
+        tabela.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        tabela.getTableHeader().setOpaque(false);
+        tabela.getTableHeader().setBackground(new Color(200, 200, 200));
+        tabela.getTableHeader().setForeground(new Color(0, 0, 0));
+        tabela.setRowHeight(20);
+    }
+
+    public void populaProduto() {
+        //Popula produto
+        sgbs.Controller.ControllerStock ctrl = new sgbs.Controller.ControllerStock();
+        sgbs.Model.value_object.Stock f;
+        fun = ctrl.listar();
+
+        for (int i = 0; i < fun.size(); i++) {
+            //System.out.println("Ola");
+            t.addRow((Object[]) fun.elementAt(i));
+
+        }
+    }
+
+    public JPanel retornaPainel() {
+        global = new JPanel();
         global.setLayout(new BorderLayout());
         global.add(painelNorte(), BorderLayout.NORTH);
         global.add(painelCentro(), BorderLayout.CENTER);
-        global.add(painelSul(), BorderLayout.SOUTH);return global;
+        global.add(painelSul(), BorderLayout.SOUTH);
+        return global;
     }
 
     private void configurarFrame() {
+
         global = new JPanel();
         global.setLayout(new BorderLayout());
         global.add(painelNorte(), BorderLayout.NORTH);
@@ -152,9 +217,9 @@ public class Stock implements ActionListener {
         panel.setBackground(new java.awt.Color(255, 255, 255));
         panelB.setBackground(new java.awt.Color(255, 255, 255));
         constraints.insets = new Insets(2, 2, 3, 2);
-       // constraints.fill = GridBagConstraints.BOTH;
-       //constraints.weightx=1;
-        constraints.weighty=1;
+        // constraints.fill = GridBagConstraints.BOTH;
+        //constraints.weightx=1;
+        constraints.weighty = 1;
         //adicionar informacoes do fornecedor
         constraints.anchor = GridBagConstraints.LINE_START;
 
@@ -185,7 +250,7 @@ public class Stock implements ActionListener {
 
         principal.add(panel, BorderLayout.NORTH);
         principal.add(panelB, BorderLayout.SOUTH);
-        
+
         return principal;
     }
 
@@ -275,11 +340,54 @@ public class Stock implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == b_cancelar) {
-            frame.dispose();
-       
-       
-    }
+        if (c_Fornecedor.getSelectedIndex() != 0) {
+            int id = c_Fornecedor.getSelectedIndex();
+            ControllerFornecedor ctrl = new ControllerFornecedor();
+            Fornecedor f;
+            f = ctrl.getFunById(id);
+            tf_contacto.setText(f.getContacto());
+            tf_morada.setText(f.getMorada());
+            tf_nuit.setText(f.getNuit() + "");
+            //    System.out.println(  c_Fornecedor.getSelectedIndex());
+        }
+
+        if (e.getSource() == b_procurar) {
+            if (c_Fornecedor.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(null, "Selecione o fornecedor para avançar");
+            } else {
+                new Tabela_Produtos(this);
+            }
+        }
+        if (e.getSource() == b_confirmar) {
+
+            ControllerStock ctr = new ControllerStock();
+            sgbs.Model.value_object.Stock sf;
+            float total = Float.parseFloat(tf_preco.getText()) * Integer.parseInt(tf_qtd.getText());
+            boolean scc = false;
+            int g = ctr.gerador();
+
+            try {
+                //    System.out.println(codigoFamilia + " " + codigoSF + " " + tf_descricao.getText() + " " + preco + tf_validade.getText() + " " + iva);
+
+                scc = ctr.cadastrar(g, Integer.parseInt(tf_codigo.getText()), c_Fornecedor.getSelectedIndex(),
+                        tf_descricao.getText(), Float.parseFloat(tf_preco.getText()), Integer.parseInt(tf_qtd.getText()), (float) total);
+
+                //scc=ctr.modificar(Integer.parseInt(tf_codigo.getText()),tf_nome.getText(),tf_contacto.getText(),
+                //  tf_morada.getText(),Long.parseLong(tf_nuit.getText()),tf_username.getText(),tf_password.getText(),c_terceiro.getSelectedItem()+"");
+                if (scc) {
+                     b_terminar.setEnabled(scc);
+                    JOptionPane.showMessageDialog(null, "Realizado Com Sucesso!");
+                    t.addRow(new Object[]{g, tf_codigo.getText(), c_Fornecedor.getSelectedIndex(), tf_descricao.getText(), Float.parseFloat(tf_preco.getText()), Integer.parseInt(tf_qtd.getText()), total});
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Os Campos não foram preenchidos Correctamente!");
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "ERRO:" + ex);
+            }
+
+        }
+
     }
 
 }

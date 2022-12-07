@@ -102,7 +102,7 @@ public class Tabela_Funcionario implements ActionListener{
          //
   
        tabela = new JTable(fn);
-       scrollClient=new JScrollPane(tabela);
+       //scrollClient=new JScrollPane(tabela);
         readFuncionario();
         configurar_tabelas(); 
  

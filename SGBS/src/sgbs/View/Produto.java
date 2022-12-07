@@ -57,7 +57,7 @@ public class Produto implements ActionListener {
 
     public Produto() {
         inicializarComponentes();
-        configurarFrame();
+        //configurarFrame();
 
     }
         public void readProduto(){ 
@@ -130,12 +130,14 @@ public class Produto implements ActionListener {
         //Inicializar tabelas
         fn = new DefaultTableModel();
         fn.addColumn("Codigo");
-        fn.addColumn("Descrição");
         fn.addColumn("Familia");
         fn.addColumn("SubFamilia");
+        fn.addColumn("Descrição");
         fn.addColumn("Preço");
         fn.addColumn("Qtd");
         tabela = new JTable(fn);
+        
+        tf_codigo.setEnabled(false);
         
         scrollProduto = new JScrollPane(tabela);
         configurar_JTable();
@@ -186,7 +188,7 @@ public class Produto implements ActionListener {
     }
 
     private void configurarFrame() {
-        retornaPainel();
+       // retornaPainel();
         frame.add(global);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
@@ -492,11 +494,15 @@ public class Produto implements ActionListener {
                     //  tf_morada.getText(),Long.parseLong(tf_nuit.getText()),tf_username.getText(),tf_password.getText(),c_terceiro.getSelectedItem()+"");
                 }
                 if (scc) {
-                     tabela.removeAll();
-                     configurar_JTable();
-                     readProduto();
+                  
 
                     JOptionPane.showMessageDialog(null, "Realizado Com Sucesso!");
+                      tabela.removeAll();
+                     configurar_JTable();
+                     readProduto();
+                     tf_descricao.setText("");
+                     tf_preco_11.setText("");
+                     tf_validade.setText("");
                    // this.frame.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Os Campos não foram preenchidos Correctamente!");

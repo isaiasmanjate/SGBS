@@ -10,24 +10,28 @@ package sgbs.View;
  */
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import sgbs.Controller.ControllerCliente;
+import sgbs.Controller.ControllerFornecedor;
 
-public class Terceiro {
+public class Terceiro implements ActionListener {
 
     JFrame frame;
     JPanel global;
 
     GridBagConstraints constraints = new GridBagConstraints();
-    private sgbs.View.controles.combobox.Combobox c_terceiro;
-    private sgbs.View.controles.textfield_suggestion.TextFieldSuggestion tf_morada, tf_contacto, tf_nuit, tf_codigo, tf_nome;
-    private JLabel l_terceiro, l_morada, l_contacto, l_nuit, l_codigo, l_icon, l_titulo_frame, l_nome;
-    private sgbs.View.controles.MyButton.MyButtonSubmeter b_cancelar, b_lista, b_terminar, b_gravar, b_apagar;
+    sgbs.View.controles.combobox.Combobox c_terceiro;
+    sgbs.View.controles.textfield_suggestion.TextFieldSuggestion tf_morada, tf_contacto, tf_nuit, tf_codigo, tf_nome;
+    JLabel l_terceiro, l_morada, l_contacto, l_nuit, l_codigo, l_icon, l_titulo_frame, l_nome;
+    sgbs.View.controles.MyButton.MyButtonSubmeter b_cancelar, b_lista, b_terminar, b_gravar, b_apagar;
     String s_terceiro[] = {" ", "Fornecedor", "Cliente"};
 
     public Terceiro() {
         inicialializarComponentes();
-      //  configurarFrame();
+        configurarFrame();
     }
 
     private void inicialializarComponentes() {
@@ -63,8 +67,16 @@ public class Terceiro {
         b_apagar = new sgbs.View.controles.MyButton.MyButtonSubmeter();
         //b_lista.setBorder(new RoundedBorder(20));
 
+        //Eventos
+        b_cancelar.addActionListener(this);
+        b_apagar.addActionListener(this);
+        b_gravar.addActionListener(this);
+        b_terminar.addActionListener(this);
+        b_lista.addActionListener(this);
+
     }
-    public JPanel retornarPainel(){
+
+    public JPanel retornarPainel() {
         global = new JPanel();
         global.setLayout(new BorderLayout());
         global.add(painelNorte(), BorderLayout.NORTH);
@@ -74,7 +86,7 @@ public class Terceiro {
     }
 
     private void configurarFrame() {
-        
+        retornarPainel();
         frame.add(global);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -221,7 +233,7 @@ public class Terceiro {
         b_terminar.setPreferredSize(new Dimension(100, 25));
         b_terminar.setBackground(new java.awt.Color(0, 134, 190));
         b_terminar.setForeground(new java.awt.Color(255, 255, 255));
-        b_terminar.setText("Terminar");
+        b_terminar.setText("Editar");
         b_terminar.setRadius(20);
         b_terminar.setBorder(null);
         //Cancelar
@@ -239,5 +251,93 @@ public class Terceiro {
         b_gravar.setRadius(20);
         b_gravar.setBorder(null);
 
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == b_gravar) {
+            String opcao = c_terceiro.getSelectedItem().toString();
+            if (opcao.equalsIgnoreCase("fornecedor")) {
+                boolean scc = false;
+                ControllerFornecedor ctr = new ControllerFornecedor();
+                try {
+
+                    scc = ctr.cadastrar(ctr.gerador(), tf_nome.getText(), tf_contacto.getText(),
+                            tf_morada.getText(), Long.parseLong(tf_nuit.getText()));
+
+                 
+
+                    if (scc) {
+
+                        JOptionPane.showMessageDialog(null, "Realizado Com Sucesso!");
+                        this.frame.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Os Campos não foram preenchidos Correctamente!");
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "ERRO:" + ex);
+                }
+            } else {
+                boolean scc = false;
+                ControllerCliente ctr = new ControllerCliente();
+                try {
+
+                    scc = ctr.cadastrar(ctr.gerador(), tf_nome.getText(), tf_contacto.getText(),
+                            tf_morada.getText(), Long.parseLong(tf_nuit.getText()));
+
+                    if (scc) {
+
+                        JOptionPane.showMessageDialog(null, "Realizado Com Sucesso!");
+                        this.frame.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Os Campos não foram preenchidos Correctamente!");
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "ERRO:" + ex);
+                }
+            }
+        }
+        if(e.getSource()==b_lista){
+            new Tabela_terceiros(this);
+        }
+        if(e.getSource()==b_terminar){
+               String opcao = c_terceiro.getSelectedItem().toString();
+            boolean scc=false;
+            ControllerFornecedor ctr = new ControllerFornecedor();
+             if (opcao.equalsIgnoreCase("fornecedor")){
+            try{             
+
+                scc=ctr.modificar(Integer.parseInt(tf_codigo.getText()),tf_nome.getText(),tf_contacto.getText(),
+                        tf_morada.getText(),Long.parseLong(tf_nuit.getText()));
+                
+                if(scc){
+                        
+                        JOptionPane.showMessageDialog(null, "Realizado Com Sucesso!");
+                        this.frame.dispose();
+                } else{
+                        JOptionPane.showMessageDialog(null, "Os Campos não foram preenchidos Correctamente!");
+                }
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null, "ERRO:"+ex);
+            }
+        }else{
+               try{             
+                 ControllerCliente ctrc = new ControllerCliente();
+                scc=ctrc.modificar(Integer.parseInt(tf_codigo.getText()),tf_nome.getText(),tf_contacto.getText(),
+                        tf_morada.getText(),Long.parseLong(tf_nuit.getText()));
+                
+                if(scc){
+                        
+                        JOptionPane.showMessageDialog(null, "Realizado Com Sucesso!");
+                        this.frame.dispose();
+                } else{
+                        JOptionPane.showMessageDialog(null, "Os Campos não foram preenchidos Correctamente!");
+                }
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null, "ERRO:"+ex);
+            }     
+             }
+        
+    }
     }
 }

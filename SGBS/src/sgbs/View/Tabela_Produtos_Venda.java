@@ -27,23 +27,23 @@ import sgbs.Controller.ControllerStock;
  *
  * @author Ricardo
  */
-public class Tabela_Produtos implements ActionListener {
+public class Tabela_Produtos_Venda implements ActionListener {
 
-    private JFrame frame;
-    private JPanel global;
-    private JTable tabela;
-    private JLabel l_pesquisar;
-    private sgbs.View.controles.textfield_suggestion.TextFieldSuggestion tf_pesquisar;
+     JFrame frame;
+     JPanel global;
+     JTable tabela;
+     JLabel l_pesquisar;
+     sgbs.View.controles.textfield_suggestion.TextFieldSuggestion tf_pesquisar;
     sgbs.View.controles.MyButton.MyButtonSubmeter b_selecionar, b_pesquisar;
     DefaultTableModel t;
     JScrollPane s;
     Vector fun;
-    Stock stock;
+    Venda venda;
 
-    public Tabela_Produtos(Stock stock) {
+    public Tabela_Produtos_Venda(Venda venda) {
         inicializarComponentes();
         configurarFrame();
-        this.stock = stock;
+        this.venda= venda;
     }
 
     public void populaProduto() {
@@ -59,7 +59,7 @@ public class Tabela_Produtos implements ActionListener {
         }
     }
 
-    public Tabela_Produtos() {
+    public Tabela_Produtos_Venda() {
 
     }
 
@@ -108,6 +108,7 @@ public class Tabela_Produtos implements ActionListener {
         //eventos
         b_pesquisar.addActionListener(this);
         b_selecionar.addActionListener(this);
+       
     }
 
     private Component painelSul() {
@@ -200,7 +201,7 @@ public class Tabela_Produtos implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new Tabela_Produtos(null);
+        new Tabela_Produtos_Venda(null);
     }
 
     @Override
@@ -231,13 +232,13 @@ public class Tabela_Produtos implements ActionListener {
              int index=  tabela.getSelectedRow();
             ControllerProduto ctrl=new ControllerProduto();
              sgbs.Model.value_object.Produto f=ctrl.getFunById(index+1);
-             stock.tf_codigo.setText(f.getId_produto()+"");
-             stock.tf_descricao.setText(f.getDescricao());
-             stock.tf_preco.setText("0.0");
-             stock.tf_preco.setEditable(true);
-             stock.b_confirmar.setEnabled(true);
-             stock.tf_qtd.setEditable(true);
-             stock.tf_qtd.setText("0");
+             venda.tf_codigo.setText(f.getId_produto()+"");
+             venda.tf_descricao.setText(f.getDescricao());
+             venda.tf_preco.setText(f.getPreco_venda()+"");
+             //stock.tf_preco.setEditable(true);
+             venda.b_confirmar.setEnabled(true);
+             //stock.tf_qtd.setEditable(true);
+             venda.tf_quant.setText("1");
              
          
              

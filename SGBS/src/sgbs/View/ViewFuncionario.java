@@ -39,7 +39,7 @@ public class ViewFuncionario  implements ActionListener{
 
     public ViewFuncionario() {
         inicialializarComponentes();
-        //configurarFrame();
+        configurarFrame();
     }
      
 
@@ -98,7 +98,7 @@ public class ViewFuncionario  implements ActionListener{
     }
 
     private void configurarFrame() {
-       
+         global=retornaPainel();
         frame.add(global);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -298,11 +298,13 @@ public class ViewFuncionario  implements ActionListener{
 
                 scc=ctr.modificar(Integer.parseInt(tf_codigo.getText()),tf_nome.getText(),tf_contacto.getText(),
                         tf_morada.getText(),Long.parseLong(tf_nuit.getText()),tf_username.getText(),tf_password.getText(),c_terceiro.getSelectedItem()+"");
+                    this.frame.dispose();
                 }
                 if(scc){
                         
                         JOptionPane.showMessageDialog(null, "Realizado Com Sucesso!");
-                        this.frame.dispose();
+                        
+                        //this.frame.dispose();
                 } else{
                         JOptionPane.showMessageDialog(null, "Os Campos não foram preenchidos Correctamente!");
                 }
@@ -319,7 +321,7 @@ public class ViewFuncionario  implements ActionListener{
         }
         if(e.getSource()==b_lista){
             new Tabela_Funcionario(this);
-            frame.dispose();
+            //frame.dispose();
         }
         if(e.getSource()==b_apagar){
              boolean status=false;

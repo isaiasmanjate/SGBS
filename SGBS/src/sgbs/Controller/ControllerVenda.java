@@ -41,6 +41,11 @@ public class ControllerVenda {
         return status;
             
     }
+     public Venda getVendaById(int codigo) {
+        VendaDao fdao = new VendaDao();
+        Venda f = fdao.getVendaById(codigo);
+        return f;
+    }
 
     public Vector listar(){
         VendaDao fdao=new VendaDao();

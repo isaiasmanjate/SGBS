@@ -45,7 +45,7 @@ public class VendaDao {
             v.setId_funcionario(rs.getInt("codigo_funcionario"));
             v.setDescricao(rs.getString("descricao"));
             v.setQtd(rs.getInt("quantidade"));
-            v.setPreco(rs.getFloat("Preço_venda"));
+            v.setPreco(rs.getFloat("Preco_venda"));
             v.setData(rs.getString("data_venda"));
             v.setTotal(rs.getFloat("total"));
             
@@ -71,8 +71,28 @@ public class VendaDao {
         
         for(int j = 0; j < func.size(); j++){
               if(j == (func.size() - 1))
-                  num = func.get(j).getId_cliente();
+                  num = func.get(j).getId_venda();
         }
         return num;
+    }
+    public Venda getVendaById(int id) {
+        ArrayList<Venda> produto = readAll();
+        Venda p = new Venda();
+
+        for (int i = 0; i < produto.size(); i++) {
+            if (id == produto.get(i).getId_venda()) {
+                p.setId_produto(produto.get(i).getId_produto());
+                p.setData(produto.get(i).getData());
+                p.setDescricao(produto.get(i).getDescricao());
+                p.setId_funcionario(produto.get(i).getId_funcionario());
+                p.setId_cliente(produto.get(i).getId_cliente());
+                p.setId_venda(produto.get(i).getId_venda());
+                p.setPreco(produto.get(i).getPreco());
+                p.setQtd(produto.get(i).getQtd());
+                p.setTotal(produto.get(i).getTotal());
+
+            }
+        }
+        return p;
     }
 }
